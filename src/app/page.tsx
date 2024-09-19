@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Home, ChevronRight, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import logo from "../public/uinta-logo-black.jpg"
 
 export default function LandingPage() {
   return (
@@ -11,8 +12,12 @@ export default function LandingPage() {
       <header className="sticky top-0 z-50 w-full border-b border-[#FDC107]/20 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60">
         <div className="container mx-auto flex h-16 justify-between">
           <div className="flex items-center space-x-4">
-            <span className="text-5xl text-[#FDC107] font-bold">Uinta</span>
-          </div>
+            <Image src={logo}  width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: '100%', height: 'auto' }}  alt="logo"></Image>
+{/*             <span className="text-5xl text-[#FDC107] font-bold">Uinta</span>
+ */}          </div>
           <nav className="flex items-center space-x-6">
             <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
               About
