@@ -3,11 +3,12 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Menu, X, ChevronRight, Star } from "lucide-react"
+import { Menu, X, ChevronRight, Star, Instagram, Phone } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import logo from "../public/uinta-logo.svg"
 import placeholder from "../public/placeholder.svg"
+import image from "../public/image1.jpg"
 
 export default function LandingPage() {
 
@@ -81,18 +82,15 @@ export default function LandingPage() {
         <section className="w-full py-12 md:py-24 lg:py-32 bg-[#111]">
           <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">
-              Our Portfolio
+              Nuestro Portfolio
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="relative aspect-video overflow-hidden rounded-lg">
+                <div key={i} className="relative aspect-video overflow-hidden rounded-lg flex items-center justify-center">
                   <Image
-                    src={placeholder}
+                    src={image}
                     alt={`Project ${i}`}
                     className="object-cover"
-                    width={600}
-                    height={200}
-                    
                   />
                 </div>
               ))}
@@ -100,7 +98,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-primary">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-[#111]">
           <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">
               Beneficios del sistema SIP
@@ -125,7 +123,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-[#111]">
+        {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-[#111]">
           <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">
               Our Models
@@ -153,12 +151,12 @@ export default function LandingPage() {
               )}
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="w-full py-12 md:py-24 lg:py-32 bg-primary">
           <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">
-              What Our Clients Say
+              Opiniónes de Nuestros Clientes
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[1, 2, 3].map((i) => (
@@ -182,16 +180,16 @@ export default function LandingPage() {
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Ready to Build Your Dream Home?
+                ¿Listo para Construir la Casa de Tus Sueños?
               </h2>
               <p className="mx-auto max-w-[600px] text-gray-400 md:text-xl">
-                Contact us today to learn more about how the SIP System can make your dream home a reality.
+                Contáctanos hoy para aprender más sobre cómo el Sistema SIP puede hacer realidad la casa de tus sueños.
               </p>
               <div className="w-full max-w-sm space-y-2">
                 <form className="flex space-x-2">
                   <Input
                     className="flex-1 bg-primary border-[#FDC107]/20 text-white placeholder:text-gray-400"
-                    placeholder="Enter your email"
+                    placeholder="Ingresa tu email"
                     type="email"
                   />
                   <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90">Get Started</Button>
@@ -202,11 +200,19 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="w-full border-t border-[#FDC107]/20 bg-primary py-6">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <p className="text-center text-sm leading-loose text-gray-400 md:text-left">
-            © 2023 SIP System Homes. All rights reserved.
-          </p>
+      <footer className="w-full border-t border-[#FDC107]/20 bg-black py-6">
+        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+          <div className="flex items-center space-x-4">
+            <p className="text-center text-sm leading-loose text-gray-400 md:text-left">
+              © 2023 SIP System Homes. All rights reserved.
+            </p>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#FDC107]">
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a href="tel:+1234567890" className="text-gray-400 hover:text-[#FDC107]">
+              <Phone className="h-5 w-5" />
+            </a>
+          </div>
           <nav className="flex items-center space-x-4">
             <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
               Privacy Policy
