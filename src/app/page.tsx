@@ -169,7 +169,7 @@ export default function LandingPage() {
                     ))}
                   </div>
                   <p className="text-gray-400 mb-4">
-                    "The SIP System has transformed our home. It's energy-efficient, comfortable, and was built in record time!"
+                    The SIP System has transformed our home. Its energy-efficient, comfortable, and was built in record time!
                   </p>
                   <p className="font-medium">- Satisfied Homeowner {i}</p>
                 </Card>
