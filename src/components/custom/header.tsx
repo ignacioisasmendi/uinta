@@ -4,7 +4,7 @@ import { Button } from "@/components/shadcn/button"
 import { Menu, X} from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import logo from "../public/uinta-logo.svg"
+import logo from "../../public/uinta-logo.svg"
 
 
 export default function Header() {
@@ -55,3 +55,4 @@ export default function Header() {
     </header>
   )
 }
+
