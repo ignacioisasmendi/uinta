@@ -1,64 +1,19 @@
-'use client'
-import { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Menu, X, ChevronRight, Star, Instagram, Phone } from "lucide-react"
+import { Button } from "@/components/shadcn/button"
+import { Card } from "@/components/shadcn/card"
+import { Input } from "@/components/shadcn/input"
+import { ChevronRight, Star} from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import logo from "../public/uinta-logo.svg"
-import placeholder from "../public/placeholder.svg"
 import image from "../public/image1.jpg"
+import Footer from '@/components/Footer'
+import Header from "@/components/Header"
+import imagePrincipal from "../public/entre-sierras/principal.jpg"
 
 export default function LandingPage() {
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
-
   return (
     <div className="w-full flex flex-col bg-primary text-white">
-      <header className="sticky top-0 z-50 w-full border-b border-[#FDC107]/20 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/60">
-        <div className="w-full flex px-4 md:px-16 h-16 justify-between ">
-          <div>
-            <Image src={logo} className="w-auto h-16" alt="logo"></Image>
-          </div>
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
-              Nosotros
-            </Link>
-            <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
-              Portfolio
-            </Link>
-            <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
-              Contacto
-            </Link>
-            <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90">Solicitar cotizacion</Button>
-          </nav>
-          <div className="md:hidden flex items-center">
-            <Button variant="ghost" size="icon" onClick={toggleMenu} aria-label="Toggle menu">
-              {isMenuOpen ? <X className="h-12 w-12" /> : <Menu className="h-12 w-12" />}
-            </Button>
-          </div>
-        </div>
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <nav className="flex flex-col items-center space-y-4 py-4">
-              <Link className="text-sm font-medium hover:text-secondary transition-colors" href="#">
-                Nosotros
-              </Link>
-              <Link className="text-sm font-medium hover:text-secondary transition-colors" href="#">
-                Portfolio
-              </Link>
-              <Link className="text-sm font-medium hover:text-secondary transition-colors" href="#">
-                Contacto
-              </Link>
-              <Button className="bg-secondary text-primary-foreground hover:bg-secondary/90">Solicitar cotizacion</Button>
-            </nav>
-          </div>
-        )}
-      </header>
-
+      <Header/>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-primary">
           <div className="container mx-auto mx-auto px-4 md:px-6">
@@ -70,9 +25,9 @@ export default function LandingPage() {
                 Experimenta el futuro de la construcción de viviendas con nuestro innovador sistema de Paneles Estructurales Aislados. Eficiente, sostenible y construido para durar.
               </p>
               <div className="space-x-4">
-                <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90">Explore Models</Button>
+                <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90">Explora nuestros proyectos</Button>
                 <Button variant="outline" className="border-[#FDC107] text-[#FDC107] hover:bg-[#FDC107] hover:text-black">
-                  Learn More
+                  ¿Que es el sistema SIP?
                 </Button>
               </div>
             </div>
@@ -85,15 +40,28 @@ export default function LandingPage() {
               Nuestro Portfolio
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="relative aspect-video overflow-hidden rounded-lg flex items-center justify-center">
-                  <Image
-                    src={image}
-                    alt={`Project ${i}`}
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+              {["Entre Sierras", "Eco Retreat", "Urban Oasis", "Family Haven", "Mountain Lodge", "Coastal Dream"].map(
+                (model) => (
+                  <Card key={model} className="bg-primary border-[#FDC107]/20">
+                    <Image
+                      src={imagePrincipal}
+                      alt={model}
+                      className="object-cover w-full h-48"
+                      width={400}
+                      height={200}
+                    />
+                    <div className="p-4">
+                      <h3 className="text-xl font-bold mb-2">{model}</h3>
+{/*                   <p className="text-gray-400 mb-4">Experience modern living with our {model.toLowerCase()} design.</p>*/}                  
+                      <Link href="/project/1">
+                        <Button variant="outline" className="w-full border-[#FDC107] text-[#FDC107] hover:bg-[#FDC107] hover:text-black">
+                          Mas detalle
+                        </Button>
+                      </Link>
+                    </div>
+                  </Card>
+                )
+              )}
             </div>
           </div>
         </section>
@@ -123,7 +91,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-[#111]">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-[#111]">
           <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">
               Our Models
@@ -133,7 +101,7 @@ export default function LandingPage() {
                 (model) => (
                   <Card key={model} className="bg-primary border-[#FDC107]/20">
                     <Image
-                      src={placeholder}
+                      src={imagePrincipal}
                       alt={model}
                       className="object-cover w-full h-48"
                       width={400}
@@ -151,7 +119,7 @@ export default function LandingPage() {
               )}
             </div>
           </div>
-        </section> */}
+        </section> 
 
         <section className="w-full py-12 md:py-24 lg:py-32 bg-primary">
           <div className="container mx-auto px-4 md:px-6">
@@ -200,32 +168,7 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="w-full border-t border-[#FDC107]/20 bg-black py-6">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <div className="flex items-center space-x-4">
-            <p className="text-center text-sm leading-loose text-gray-400 md:text-left">
-              © 2023 SIP System Homes. All rights reserved.
-            </p>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#FDC107]">
-              <Instagram className="h-5 w-5" />
-            </a>
-            <a href="tel:+1234567890" className="text-gray-400 hover:text-[#FDC107]">
-              <Phone className="h-5 w-5" />
-            </a>
-          </div>
-          <nav className="flex items-center space-x-4">
-            <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
-              Privacy Policy
-            </Link>
-            <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
-              Terms of Service
-            </Link>
-            <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
-              Contact Us
-            </Link>
-          </nav>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   )
 }
