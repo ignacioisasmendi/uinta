@@ -1,6 +1,6 @@
 import Link from "next/link"
-import { Button } from "@/components/shadcn/button"
-import { Input } from "@/components/shadcn/input"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Instagram, Phone, MapPin, Mail, Facebook, Twitter, Youtube, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import logo from "@/public/uinta-logo.svg"

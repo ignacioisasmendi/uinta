@@ -1,6 +1,6 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/shadcn/accordion" 
-import { Button } from "@/components/shadcn/button"                          
-import { Card, CardContent } from "@/components/shadcn/card"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion" 
+import { Button } from "@/components/ui/button"                          
+import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight, Zap, Leaf, Clock, PiggyBank, Shield, Hexagon } from "lucide-react"
 
 export default function Benefits() {

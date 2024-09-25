@@ -1,5 +1,5 @@
-import { Button } from "@/components/shadcn/button"
-import { Card, CardContent } from "@/components/shadcn/card"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"

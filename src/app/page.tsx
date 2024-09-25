@@ -1,6 +1,6 @@
-import { Button } from "@/components/shadcn/button"
-import { Card } from "@/components/shadcn/card"
-import { Input } from "@/components/shadcn/input"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
 import { ChevronRight, Star} from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -28,7 +28,7 @@ export default function LandingPage() {
               </p>
               <div className="flex flex-col md:flex-row max-md:space-y-2 md:space-x-4">
                 <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90">Explora nuestros proyectos</Button>
-                <Button variant="outline" className="border-[#FDC107] text-[#FDC107] hover:bg-[#FDC107] hover:text-black">
+                <Button variant="destructive" className="border-[#FDC107] text-[#FDC107] hover:bg-[#FDC107] hover:text-black">
                   ¿Que es el sistema SIP?
                 </Button>
               </div>
