@@ -1,12 +1,22 @@
 import { Button} from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Lock, Mail } from "lucide-react"
+import { Lock, Mail, Loader2 } from "lucide-react"
+import { useActionState } from 'react'
+import { login } from '@/app/actions/auth'
+import { useRouter } from 'next/navigation'
 
 export default function LoginForm() {
+  const [state, action, isPending] = useActionState(login, null)
+  const router = useRouter()
+
+  if(state?.token){
+    localStorage.setItem('token', state.token)
+    router.push('/admin')
+  }
 
   return (
-    <form className="mt-8 space-y-6" action={}>
+    <form className="mt-8 space-y-6" action={action}>
       <div className="space-y-4">
         <div>
           <Label htmlFor="email" className="sr-only">
@@ -48,8 +58,20 @@ export default function LoginForm() {
         </div>
       </div>
       <div>
-        <Button type="submit" className="w-full bg-[#FDC107] hover:bg-[#FDC107]/90 text-black">
-          Sign in
+      {state?.errors?.email && <p>{state.errors.email}</p>}
+      <Button 
+            type="submit" 
+            className="w-full bg-[#FDC107] hover:bg-[#FDC107]/90 text-black"
+            disabled={isPending}
+          >
+            {isPending ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Login in...
+              </>
+            ) : (
+              'Log In'
+            )}
         </Button>
       </div>
     </form>
