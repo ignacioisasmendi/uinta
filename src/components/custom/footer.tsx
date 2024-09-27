@@ -75,9 +75,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-[#FDC107] flex items-center">
+                <Link href="/login" className="text-gray-400 hover:text-[#FDC107] flex items-center">
                   <ArrowRight size={16} className="mr-2" />
-                  FAQ
+                  Admin
                 </Link>
               </li>
             </ul>

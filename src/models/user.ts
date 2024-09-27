@@ -44,7 +44,6 @@ export async function getUserByEmail(email: string):Promise<User | null>{
   if (!users) await init()
   const result: User | null = await users.findOne({ email })
   console.log(result);
-  
   return result
   
 }
