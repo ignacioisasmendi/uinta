@@ -1,11 +1,9 @@
 "use server"
 import { SignupFormSchema, FormState } from '@/lib/zod/definitions'
 import { addUser } from '@/lib/mongo/user'
-import {User} from '@/domain/user'
- 
- 
-export async function signup(formData: FormData) {
+import { User } from '@/domain/user'
 
+export async function signup(previousState: FormState, formData: FormData): Promise<FormState> {
   const validatedFields = SignupFormSchema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
@@ -18,16 +16,17 @@ export async function signup(formData: FormData) {
     }
   }
  
-  const user:User = {
+  const user: User = {
     name: validatedFields.data.name,
-    email: validatedFields.data.name,
-    password: validatedFields.data.name,
+    email: validatedFields.data.email,  // Fixed: was using name instead of email
+    password: validatedFields.data.password,  // Fixed: was using name instead of password
   } 
 
-  try{
-    const users = await addUser(user ); 
+  try {
+    await addUser(user);
+    return { message: 'User created successfully' }
   } catch (err) {
-    console.log(err)
+    console.error(err)
+    return { message: 'An error occurred while creating the user' }
   }
-
 }

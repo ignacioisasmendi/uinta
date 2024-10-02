@@ -11,7 +11,7 @@ import {S3Client, PutObjectCommand} from "@aws-sdk/client-s3"
 }) */
 
 
-export async function createProject(previousState, formData: FormData) {
+export async function createProject(formData: FormData) {
 
 
   //Implement the logic to save the project data in the database and upload the images to S3

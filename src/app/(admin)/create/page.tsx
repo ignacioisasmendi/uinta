@@ -115,15 +115,15 @@ export default function CreateProjectPage() {
                   className="bg-gray-50 border-gray-300 text-gray-900 file:bg-[#FDC107] file:text-white file:border-0"
                 />
               </div>
-              <Button type="submit" className="w-full bg-[#FDC107] text-white hover:bg-[#FDC107]/90" disabled={isPending}>
+              {/* <Button type="submit" className="w-full bg-[#FDC107] text-white hover:bg-[#FDC107]/90" disabled={isPending}>
                 {isPending ? 'Creando Proyecto...' : 'Crear Proyecto'}
-              </Button>
+              </Button> */}
             </form>
-            {state && (
+            {/* {state && (
               <div className={`mt-4 p-4 rounded ${state.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                 {state.message}
               </div>
-            )}
+            )} */}
           </CardContent>
         </Card>
       </main>

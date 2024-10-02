@@ -43,7 +43,7 @@ export default function Portfolio() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                  <p className="text-gray-400 mb-4">{item.description}</p>
+                  {/* <p className="text-gray-400 mb-4">{item.description}</p> */}
                   <Link href={`/project/${item.id}`} passHref>
                     <Button variant="link" className="text-[#FDC107] hover:text-[#FDC107]/80 p-0 group">
                       Ver Proyecto

@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Lock, Mail, User } from "lucide-react"
-import { signup } from '@/app/actions/auth'
+import { signup } from "@/app/(auth)/actions/auth"
 import { useActionState } from 'react'
 
 export default function SignUpForm() {
-  const [state, action, isPending] = useActionState(signup, null)
+  const initialState = { message: '', errors: {} };
+  const [state, action] = useActionState(signup, initialState)
 
   return (
     <form className="mt-8 space-y-6" action={action}>
