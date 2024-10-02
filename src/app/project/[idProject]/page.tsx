@@ -2,11 +2,12 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from "@/components/shadcn/button"
-import { Card, CardContent } from "@/components/shadcn/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/shadcn/tabs"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Calendar, Home, Clock, Ruler, Users, Lightbulb, Leaf, ChevronLeft, ChevronRight } from 'lucide-react'
-import Header from '@/components/Header'
+import Header from '@/components/custom/header'
+import Footer from '@/components/custom/footer'
 import image1 from "../../../public/entre-sierras/1.jpg"
 import image2 from "../../../public/entre-sierras/2.jpg"
 import image4 from "../../../public/entre-sierras/4.jpg"
@@ -30,17 +31,25 @@ export default function ProjectDetail() {
     setCurrentImage((prev) => (prev - 1 + images.length) % images.length)
   }
 
+  const timelineSteps = [
+    { title: "Design and Planning", duration: "2 weeks" },
+    { title: "SIP Manufacturing", duration: "3 weeks" },
+    { title: "On-site Assembly", duration: "4 weeks" },
+    { title: "Interior Finishing", duration: "6 weeks" },
+    { title: "Final Touches and Handover", duration: "1 week" },
+  ]
+
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[#111] text-white">
       <Header></Header>
 
       <main className="container mx-auto px-4 py-8">
         <Link href="/" className="inline-flex items-center text-[#FDC107] hover:underline mb-6">
           <ChevronLeft className="mr-2 h-4 w-4" />
-          Back to Portfolio
+          Volver a Home
         </Link>
 
-        <h1 className="text-4xl font-bold mb-6">Eco Retreat Project</h1>
+        <h1 className="text-4xl font-bold mb-6">Entre Sierras</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <div className="relative aspect-video">
@@ -164,45 +173,26 @@ export default function ProjectDetail() {
             </Card>
           </TabsContent>
           <TabsContent value="timeline" className="mt-4">
-            <Card className="bg-gray-800 border-gray-700">
+            <Card className="bg-gray-800 border-gray-700 overflow-x-auto">
               <CardContent className="p-6">
-                <ol className="relative border-l border-gray-600 space-y-6">
-                  <li className="ml-6">
-                    <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-gray-800 bg-[#FDC107]">
-                      <Clock className="w-4 h-4 text-black" />
-                    </span>
-                    <h3 className="font-semibold">Design and Planning</h3>
-                    <p className="text-gray-300">2 weeks</p>
-                  </li>
-                  <li className="ml-6">
-                    <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-gray-800 bg-[#FDC107]">
-                      <Clock className="w-4 h-4 text-black" />
-                    </span>
-                    <h3 className="font-semibold">SIP Manufacturing</h3>
-                    <p className="text-gray-300">3 weeks</p>
-                  </li>
-                  <li className="ml-6">
-                    <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-gray-800 bg-[#FDC107]">
-                      <Clock className="w-4 h-4 text-black" />
-                    </span>
-                    <h3 className="font-semibold">On-site Assembly</h3>
-                    <p className="text-gray-300">4 weeks</p>
-                  </li>
-                  <li className="ml-6">
-                    <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-gray-800 bg-[#FDC107]">
-                      <Clock className="w-4 h-4 text-black" />
-                    </span>
-                    <h3 className="font-semibold">Interior Finishing</h3>
-                    <p className="text-gray-300">6 weeks</p>
-                  </li>
-                  <li className="ml-6">
-                    <span className="absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 ring-4 ring-gray-800 bg-[#FDC107]">
-                      <Clock className="w-4 h-4 text-black" />
-                    </span>
-                    <h3 className="font-semibold">Final Touches and Handover</h3>
-                    <p className="text-gray-300">1 week</p>
-                  </li>
-                </ol>
+                <div className="relative">
+                  <ol className="relative flex justify-between min-w-max">
+                    {timelineSteps.map((step, index) => (
+                      <li key={index} className="flex flex-col items-center relative px-4">
+                        <span className="flex items-center justify-center w-12 h-12 rounded-full bg-[#FDC107] ring-4 ring-gray-800 z-10">
+                          <Clock className="w-6 h-6 text-black" />
+                        </span>
+                        <div className="mt-4 text-center">
+                          <h3 className="font-semibold text-white">{step.title}</h3>
+                          <p className="text-gray-300 text-sm">{step.duration}</p>
+                        </div>
+                        {index < timelineSteps.length - 1 && (
+                          <div className="absolute top-6 left-1/2 w-full h-1 bg-[#FDC107]" />
+                        )}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
@@ -233,13 +223,8 @@ export default function ProjectDetail() {
         </div>
       </main>
 
-      <footer className="bg-gray-900 text-white py-8 mt-12">
-        <div className="container mx-auto px-4">
-          <p className="text-center text-sm">
-            © {new Date().getFullYear()} SIP System Homes. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer/>
+      
     </div>
   )
 }

@@ -1,0 +1,67 @@
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { ChevronRight, ArrowRight } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import imagePrincipal from "../../public/entre-sierras/principal.jpg"
+
+
+export default function Portfolio() {
+
+  const portfolioItems = [
+    { id: 1, title: "Entre Sierras", image: 'https://drive.google.com/uc?id=1BaNkjwQoSUlv3CPnxYW3Z6xEaNLectju' },
+    { id: 2, title: "Entre Sierras", image: imagePrincipal },
+    { id: 3, title: "Entre Sierras", image: imagePrincipal },
+    { id: 4, title: "Entre Sierras", image: imagePrincipal },
+    { id: 5, title: "Entre Sierras", image: imagePrincipal },
+    { id: 6, title: "Entre Sierras", image: imagePrincipal },    
+  ]
+
+  return (
+    <section className="w-full px-4 md:px-16 py-12 md:py-24 lg:py-32 bg-black">
+      <div className="container">
+        <div className="flex flex-col md:flex-row justify-center items-center mb-12">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white mb-4 md:mb-0">
+            Nuestro Portfolio
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {portfolioItems.map((item) => (
+            <Card key={item.id} className="bg-gray-900 border-none overflow-hidden group">
+              <CardContent className="p-0">
+                <div className="relative aspect-video overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                    
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
+                  {/* <p className="text-gray-400 mb-4">{item.description}</p> */}
+                  <Link href={`/project/${item.id}`} passHref>
+                    <Button variant="link" className="text-[#FDC107] hover:text-[#FDC107]/80 p-0 group">
+                      Ver Proyecto
+                      <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        <div className="flex justify-center mt-12">
+        <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90 flex items-center">
+            Ver mas proyectos
+            <ArrowRight className="ml-2 h-4 w-4" />
+        </Button>
+        </div>
+      </div>
+    </section>
+  )
+}
