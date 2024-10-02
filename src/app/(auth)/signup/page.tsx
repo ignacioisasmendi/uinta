@@ -16,9 +16,6 @@ export default function SignUpPage() {
     <div className="flex h-screen">
       <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-12">
         <div className="max-w-md w-full space-y-8">
-          <div className="text-center">
-            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Admin Sign Up</h2>
-          </div>
           <SignUpForm></SignUpForm>
         </div>
       </div>
@@ -28,9 +25,7 @@ export default function SignUpPage() {
           <Image 
             src={signup} 
             alt='signup image'
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center bottom"
+            className="max-w-full h-auto object-cover"
             priority
           />
         </div>
@@ -40,7 +35,7 @@ export default function SignUpPage() {
             alt="logo" 
             width={400} 
             height={128} 
-            objectFit="contain"
+            className="object-contain"
           />
         </div>
       </div>

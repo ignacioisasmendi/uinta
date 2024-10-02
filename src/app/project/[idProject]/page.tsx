@@ -56,9 +56,7 @@ export default function ProjectDetail() {
             <Image
               src={images[currentImage]}
               alt={`Project image ${currentImage + 1}`}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
+              className="max-w-full h-auto object-cover rounded-lg"
             />
             <Button
               variant="outline"
