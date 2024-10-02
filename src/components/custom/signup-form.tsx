@@ -3,14 +3,17 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Loader2, Lock, Mail, User, CheckCircle2 } from "lucide-react"
-import { signup } from '@/app/actions/auth'
+import { signup } from '@/app/(auth)/actions/auth'
 import { useActionState } from 'react'
+import { FormState } from '@/lib/zod/definitions'
+
 
 export default function SignUpForm() {
-  const [state, action, isPending] = useActionState(signup, null)
+  const initialState: FormState = { message: '', errors: {} };
+  const [state, action, isPending] = useActionState(signup, initialState)
 
 
-  if (state?.sucessfull == true) {
+  if (state?.successful == true) {
     return (
       <div className="flex flex-col items-center justify-center space-y-4">
         <CheckCircle2 className="w-16 h-16 text-green-500" />
