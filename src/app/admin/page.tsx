@@ -12,7 +12,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 export default function CreateProjectPage() {
-  const [state, formAction, isPending] = useActionState(createProject, null)
+  //const [state, formAction, isPending] = useActionState(createProject, null)
 
   return (
     <div className="min-h-screen bg-primary text-white">
@@ -39,7 +39,7 @@ export default function CreateProjectPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <form action={formAction} className="space-y-6">
+            <form className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-white">Nombre del Proyecto</Label>
                 <Input
@@ -113,15 +113,15 @@ export default function CreateProjectPage() {
                   className="bg-primary border-[#FDC107]/20 text-white file:bg-[#FDC107] file:text-black file:border-0"
                 />
               </div>
-              <Button type="submit" className="w-full bg-[#FDC107] text-black hover:bg-[#FDC107]/90" disabled={isPending}>
+              {/* <Button type="submit" className="w-full bg-[#FDC107] text-black hover:bg-[#FDC107]/90" disabled={isPending}>
                 {isPending ? 'Creando Proyecto...' : 'Crear Proyecto'}
-              </Button>
+              </Button> */}
             </form>
-            {state && (
+            {/* {state && (
               <div className={`mt-4 p-4 rounded ${state.success ? 'bg-green-500' : 'bg-red-500'}`}>
                 {state.message}
               </div>
-            )}
+            )} */}
           </CardContent>
         </Card>
       </main>

@@ -45,7 +45,19 @@ export async function signup(previousState: FormState, formData: FormData): Prom
 }
 
 export async function login(previousState: FormState, formData: FormData): Promise<FormState> {
-  const user = await getUserByEmail(formData.get('email') as string)
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
+
+  if (!email || !password) {
+    return {
+      successful: false,
+      errors: {
+        email: ['Email and password are required'],
+      },
+    }
+  }
+
+  const user = await getUserByEmail(email)
   if (!user) {
     return {
       successful: false,
@@ -55,7 +67,7 @@ export async function login(previousState: FormState, formData: FormData): Promi
     }
   }
 
-  const validPassword = await bcrypt.compare(formData.get('password') as string, user.password)
+  const validPassword = await bcrypt.compare(password, user.password)
   if (!validPassword) {
     return {
       successful: false,
@@ -76,7 +88,7 @@ export async function login(previousState: FormState, formData: FormData): Promi
     }
   }
 
-  const accessToken: string = jwt.sign({ email: user.email }, jwtSecret)
+  const accessToken: string = jwt.sign({ email: user.email }, jwtSecret, { expiresIn: '1h' })
   
   return { successful: true, token: accessToken }
 }
