@@ -18,9 +18,6 @@ export default function LoginForm() {
     router.push('/admin')
   }
 
-  if(localStorage.getItem('token')){
-    router.push('/admin')
-  }
 
   return (
     <form className="mt-8 space-y-6" action={action}>
