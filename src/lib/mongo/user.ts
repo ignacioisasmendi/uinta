@@ -1,15 +1,11 @@
 import { MongoClient, Db, Collection } from 'mongodb'
 import clientPromise from "./index"
+import {User} from '@/domain/user'
 
 let client: MongoClient
 let db: Db
 let users: Collection<User>
 
-interface User {
-  name:string,
-  email:string,
-  password:string
-}
 
 async function init(){
   if (db) return

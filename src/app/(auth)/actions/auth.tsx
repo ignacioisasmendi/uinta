@@ -1,9 +1,10 @@
 "use server"
 import { SignupFormSchema, FormState } from '@/lib/zod/definitions'
 import { addUser } from '@/lib/mongo/user'
+import {User} from '@/domain/user'
  
  
-export async function signup(previousState, formData: FormData) {
+export async function signup(formData: FormData) {
 
   const validatedFields = SignupFormSchema.safeParse({
     name: formData.get('name'),
@@ -17,14 +18,16 @@ export async function signup(previousState, formData: FormData) {
     }
   }
  
-
+  const user:User = {
+    name: validatedFields.data.name,
+    email: validatedFields.data.name,
+    password: validatedFields.data.name,
+  } 
 
   try{
-    const users = await addUser({name: formData.get('name'), email: formData.get('email'), password: formData.get('password')}); 
+    const users = await addUser(user ); 
   } catch (err) {
     console.log(err)
   }
 
-  //console.log('Inserting data in db', formData);
-  //return 'Inserted'
 }

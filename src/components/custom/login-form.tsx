@@ -6,7 +6,7 @@ import { Lock, Mail } from "lucide-react"
 export default function LoginForm() {
 
   return (
-    <form className="mt-8 space-y-6" action={}>
+    <form className="mt-8 space-y-6">
       <div className="space-y-4">
         <div>
           <Label htmlFor="email" className="sr-only">

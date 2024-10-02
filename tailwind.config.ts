@@ -17,7 +17,7 @@ const config: Config = {
   			foreground: 'var(--foreground)'
   		},
   		container: {
-  			center: 'true'
+  			center: true
   		},
   		keyframes: {
   			'accordion-down': {
