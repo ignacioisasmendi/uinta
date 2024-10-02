@@ -1,11 +1,10 @@
 "use client"
-import { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Lock, Mail } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import LoginForm from '@/components/custom/login-form'
+import signup from '@/public/entre-sierras/7.jpg'
+import logo from '@/public/uinta-logo.svg'
+
 
 export default function LoginPage() {
   
@@ -31,27 +30,24 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Right side - New Design */}
-      <div className="hidden lg:flex w-1/2 bg-black flex-col items-center justify-between p-12 relative">
-        {/* Logo placeholder */}
-        <div className="w-32 h-32 bg-[#FDC107] rounded-full mb-8"></div>
-
-        {/* Company name */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-white mb-2">SIP System Homes</h1>
-          <p className="text-xl text-[#FDC107]">Building Dreams, One Home at a Time</p>
+      <div className="hidden lg:block w-1/2 bg-black relative overflow-hidden">
+        <div className="absolute inset-0 -top-1/4">
+          <Image 
+            src={signup} 
+            alt='Scenic mountain view'
+            className="w-full h-full object-cover"
+            priority
+          />
         </div>
-
-        {/* Decorative drawing */}
-        <div className="relative w-full max-w-md aspect-square">
-          <div className="absolute inset-0 border-8 border-[#FDC107] rounded-lg"></div>
-          <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-[#FDC107]/20 rounded-lg transform -rotate-6"></div>
-          <div className="absolute top-1/3 left-1/3 w-1/3 h-1/3 border-4 border-[#FDC107] rounded-full"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-1/4 h-1/4 bg-[#FDC107] rounded-sm transform rotate-12"></div>
+        <div className="absolute top-0 left-0 w-full p-8 flex justify-center">
+          <Image 
+            src={logo} 
+            alt="Uinta logo" 
+            width={400} 
+            height={128} 
+            className="object-contain"
+          />
         </div>
-
-        {/* Footer text */}
-        <p className="text-white text-sm mt-12">© 2023 SIP System Homes. All rights reserved.</p>
       </div>
     </div>
   )

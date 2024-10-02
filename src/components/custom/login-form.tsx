@@ -13,8 +13,12 @@ export default function LoginForm() {
   const [state, action, isPending] = useActionState(login, initialState)
   const router = useRouter()
 
-  if(state?.token){
+  if(state?.token) {
     localStorage.setItem('token', state.token)
+    router.push('/admin')
+  }
+
+  if(localStorage.getItem('token')){
     router.push('/admin')
   }
 

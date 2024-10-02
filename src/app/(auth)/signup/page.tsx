@@ -16,23 +16,23 @@ export default function SignUpPage() {
     <div className="flex h-screen">
       <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-12">
         <div className="max-w-md w-full space-y-8">
-          <SignUpForm></SignUpForm>
+          <SignUpForm />
         </div>
       </div>
       
       <div className="hidden lg:block w-1/2 bg-black relative overflow-hidden">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 -top-1/4">
           <Image 
             src={signup} 
-            alt='signup image'
-            className="max-w-full h-auto object-cover"
+            alt='Scenic mountain view'
+            className="w-full h-full object-cover"
             priority
           />
         </div>
         <div className="absolute top-0 left-0 w-full p-8 flex justify-center">
           <Image 
             src={logo} 
-            alt="logo" 
+            alt="Uinta logo" 
             width={400} 
             height={128} 
             className="object-contain"

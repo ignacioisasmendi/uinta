@@ -6,12 +6,19 @@ import { Loader2, Lock, Mail, User, CheckCircle2 } from "lucide-react"
 import { signup } from '@/app/(auth)/actions/auth'
 import { useActionState } from 'react'
 import { FormState } from '@/lib/zod/definitions'
+import { useRouter } from 'next/navigation'
+
 
 
 export default function SignUpForm() {
   const initialState: FormState = { message: '', errors: {} };
   const [state, action, isPending] = useActionState(signup, initialState)
 
+  const router = useRouter()
+
+  if(state?.successful == true) {
+    router.push('/login')
+  }
 
   if (state?.successful == true) {
     return (

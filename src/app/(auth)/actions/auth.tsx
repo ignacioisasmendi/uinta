@@ -65,9 +65,11 @@ export async function login(previousState: FormState, formData: FormData): Promi
         email: ['User not found'],
       },
     }
-  }
+  }  
 
   const validPassword = await bcrypt.compare(password, user.password)
+  console.log(validPassword);
+  
   if (!validPassword) {
     return {
       successful: false,
@@ -89,6 +91,8 @@ export async function login(previousState: FormState, formData: FormData): Promi
   }
 
   const accessToken: string = jwt.sign({ email: user.email }, jwtSecret, { expiresIn: '1h' })
+  console.log(accessToken);
+  
   
   return { successful: true, token: accessToken }
 }
