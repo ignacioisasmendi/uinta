@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Loader2, Lock, Mail, User, CheckCircle2 } from "lucide-react"
-import { signup } from '@/app/(auth)/actions/auth'
+import { signup } from '@/actions/auth'
 import { useActionState } from 'react'
 import { FormState } from '@/lib/zod/definitions'
 import { useRouter } from 'next/navigation'

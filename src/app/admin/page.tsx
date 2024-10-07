@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { ChevronLeft, Upload, X } from "lucide-react"
-import { createProject } from "@/app/actions/admin"
+import { createProject } from "@/actions/admin"
 import Image from "next/image"
 import Link from "next/link"
 

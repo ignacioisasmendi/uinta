@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Lock, Mail, Loader2 } from "lucide-react"
 import { useActionState } from 'react'
-import { login } from '@/app/(auth)/actions/auth'
+import { login } from '@/actions/auth'
 import { useRouter } from 'next/navigation'
 import { FormState } from '@/lib/zod/definitions'
 
@@ -71,7 +71,7 @@ export default function LoginForm() {
             {isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Login in...
+                Logging in...
               </>
             ) : (
               'Log In'
