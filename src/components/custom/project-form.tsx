@@ -1,6 +1,7 @@
 import { Button} from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 import { Lock, Mail, Loader2 } from "lucide-react"
 import { useActionState } from 'react'
 import { login } from '@/actions/auth'
@@ -93,11 +94,11 @@ export default function CreateProjectForm() {
         {isPending ? 'Creando Proyecto...' : 'Crear Proyecto'}
       </Button> */}
     </form>
-    {/* {state && (
+   /*  {{state && (
       <div className={`mt-4 p-4 rounded ${state.success ? 'bg-green-500' : 'bg-red-500'}`}>
         {state.message}
       </div>
-    )} */}
+    )}} */
   )
 }
 
