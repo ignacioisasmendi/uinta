@@ -8,23 +8,24 @@ import { useActionState } from 'react'
 import { FormState } from '@/lib/zod/definitions'
 import { useRouter } from 'next/navigation'
 
-
-
 export default function SignUpForm() {
   const initialState: FormState = { message: '', errors: {} };
   const [state, action, isPending] = useActionState(signup, initialState)
 
   const router = useRouter()
 
-  if(state?.successful == true) {
-    router.push('/login')
-  }
-
   if (state?.successful == true) {
     return (
       <div className="flex flex-col items-center justify-center space-y-4">
         <CheckCircle2 className="w-16 h-16 text-green-500" />
-        <p className="text-xl font-semibold text-green-500">Sign up successful!</p>
+        <p className="text-xl font-semibold text-green-500">¡Registro exitoso!</p>
+        <Button 
+            type="submit" 
+            className="w-full bg-[#FDC107] hover:bg-[#FDC107]/90 text-black"
+            onClick={() => router.push('/login')}
+          >
+            Ir al inicio de sesión
+          </Button>
       </div>
     )
   }
@@ -32,33 +33,53 @@ export default function SignUpForm() {
   return (
     <>
       <div className="text-center">
-        <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Admin Sign Up</h2>
+        <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Registro de Administrador</h2>
       </div>
       <form className="mt-8 space-y-6" action={action}>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="name" className="sr-only">
-              Name
+            <Label htmlFor="first name" className="sr-only">
+              Nombre
             </Label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <User className="h-5 w-5 text-gray-400" />
               </div>
               <Input
-                id="name"
-                name="name"
+                id="firstName"
+                name="firstName"
                 type="text"
                 autoComplete="given-name"
                 required
                 className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
-                placeholder="First Name"
+                placeholder="Nombre"
               />
             </div>
-            {state?.errors?.name && <p>{state.errors.name}</p>}
+            {state?.errors?.firstName && <p>{state.errors.firstName}</p>}
+          </div>
+          <div>
+            <Label htmlFor="last name" className="sr-only">
+              Apellido
+            </Label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <User className="h-5 w-5 text-gray-400" />
+              </div>
+              <Input
+                id="lastName"
+                name="lastName"
+                type="text"
+                autoComplete="family-name"
+                required
+                className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
+                placeholder="Apellido"
+              />
+            </div>
+            {state?.errors?.lastName && <p>{state.errors.lastName}</p>}
           </div>
           <div>
             <Label htmlFor="email" className="sr-only">
-              Email address
+              Correo electrónico
             </Label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -71,14 +92,14 @@ export default function SignUpForm() {
                 autoComplete="email"
                 required
                 className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
-                placeholder="Email address"
+                placeholder="Correo electrónico"
               />
             </div>
           </div>
           {state?.errors?.email && <p>{state.errors.email}</p>}
           <div>
             <Label htmlFor="password" className="sr-only">
-              Password
+              Contraseña
             </Label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -91,14 +112,14 @@ export default function SignUpForm() {
                 autoComplete="new-password"
                 required
                 className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
-                placeholder="Password"
+                placeholder="Contraseña"
               />
             </div>
           </div>
         </div>
         {state?.errors?.password && (
           <div>
-            <p>Password must:</p>
+            <p>La contraseña debe:</p>
             <ul>
               {state.errors.password.map((error) => (
                 <li key={error}>- {error}</li>
@@ -115,10 +136,10 @@ export default function SignUpForm() {
             {isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Signing up...
+                Registrando...
               </>
             ) : (
-              'Sign up'
+              'Registrar'
             )}
           </Button>
         </div>
@@ -126,4 +147,3 @@ export default function SignUpForm() {
     </>
   )
 }
-

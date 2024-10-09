@@ -24,7 +24,7 @@ export default function LoginForm() {
       <div className="space-y-4">
         <div>
           <Label htmlFor="email" className="sr-only">
-            Email address
+            Dirección de correo electrónico
           </Label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -37,13 +37,13 @@ export default function LoginForm() {
               autoComplete="email"
               required
               className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
-              placeholder="Email address"
+              placeholder="Dirección de correo electrónico"
             />
           </div>
         </div>
         <div>
           <Label htmlFor="password" className="sr-only">
-            Password
+            Contraseña
           </Label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -56,7 +56,7 @@ export default function LoginForm() {
               autoComplete="current-password"
               required
               className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
-              placeholder="Password"
+              placeholder="Contraseña"
             />
           </div>
         </div>
@@ -71,10 +71,10 @@ export default function LoginForm() {
             {isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Logging in...
+                Iniciando sesión...
               </>
             ) : (
-              'Log In'
+              'Iniciar sesión'
             )}
         </Button>
       </div>

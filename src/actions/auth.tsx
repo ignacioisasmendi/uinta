@@ -1,12 +1,13 @@
 "use server"
 import { SignupFormSchema, FormState } from '@/lib/zod/definitions'
-import { User, addUser, getUserByEmail } from '@/models/user'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import prisma from '@/lib/db'
 
 export async function signup(previousState: FormState, formData: FormData): Promise<FormState> {
   const validatedFields = SignupFormSchema.safeParse({
-    name: formData.get('name'),
+    firstName: formData.get('firstName'),
+    lastName: formData.get('lastName'),
     email: formData.get('email'),
     password: formData.get('password'),
   })
@@ -18,9 +19,13 @@ export async function signup(previousState: FormState, formData: FormData): Prom
     }
   }
 
-  const user: User = validatedFields.data
+  const user = validatedFields.data
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email: user.email,
+    },
+  })
 
-  const existingUser = await getUserByEmail(user.email)
   if (existingUser) {
     return {
       successful: false,
@@ -31,15 +36,14 @@ export async function signup(previousState: FormState, formData: FormData): Prom
   }
 
   user.password = await bcrypt.hash(user.password, 10)
-  const result = await addUser(user); 
-  if (result.acknowledged === false) {
-    return {
-      successful: false, 
-      errors: {
-        email: ['Failed to create user'],
-      },
+  await prisma.user.create({
+    data: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password,
     }
-  }
+  }); 
 
   return { successful: true, message: 'User created successfully' }
 }
@@ -57,7 +61,12 @@ export async function login(previousState: FormState, formData: FormData): Promi
     }
   }
 
-  const user = await getUserByEmail(email)
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  })
+
   if (!user) {
     return {
       successful: false,
@@ -95,4 +104,4 @@ export async function login(previousState: FormState, formData: FormData): Promi
   
   
   return { successful: true, token: accessToken }
-}
+} 
