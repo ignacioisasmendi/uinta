@@ -1,5 +1,6 @@
 "use server"
 
+import { addProject } from "@/models/projects"
 import {S3Client, PutObjectCommand} from "@aws-sdk/client-s3"
 
 /* const s3 = new S3Client({ 
@@ -16,6 +17,7 @@ export async function createProject(formData: FormData) {
 
   //Implement the logic to save the project data in the database and upload the images to S3
   console.log('New project:', Object.fromEntries(formData))
+
 
   return { success: true, message: 'Project created successfully!' }
 }

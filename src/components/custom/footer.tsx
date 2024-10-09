@@ -22,7 +22,7 @@ export default function Footer() {
                 <Instagram size={24} />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-[#FDC107]">
+              <Link href="https://www.youtube.com/@UintaConstrucciones" className="text-gray-400 hover:text-[#FDC107]">
                 <Youtube size={24} />
                 <span className="sr-only">YouTube</span>
               </Link>

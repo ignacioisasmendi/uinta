@@ -38,9 +38,9 @@ export async function getProjects(){
   }
 }
 
-export async function addProject(user:Project) : Promise<InsertOneResult<Project>>{
+export async function addProject(project:Project) : Promise<InsertOneResult<Project>>{
   if (!projects) await init()
-  const result = await projects.insertOne(user);
+  const result = await projects.insertOne(project);
   return result 
 }
 
