@@ -4,13 +4,13 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Loader2, Lock, Mail, User, CheckCircle2 } from "lucide-react"
 import { signup } from '@/actions/auth'
-import { useActionState } from 'react'
+import {useFormState} from 'react-dom'
 import { FormState } from '@/lib/zod/definitions'
 import { useRouter } from 'next/navigation'
 
 export default function SignUpForm() {
   const initialState: FormState = { message: '', errors: {} };
-  const [state, action, isPending] = useActionState(signup, initialState)
+  const [state, action, isPending] = useFormState(signup, initialState)
 
   const router = useRouter()
 
