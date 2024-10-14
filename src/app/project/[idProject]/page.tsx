@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Calendar, Home, Clock, Ruler, Users, Lightbulb, Leaf, ChevronLeft, ChevronRight } from 'lucide-react'
-import Header from '@/components/custom/header'
-import Footer from '@/components/custom/footer'
+import Header from '@/components/landing/header'
+import Footer from '@/components/landing/footer'
 import image1 from "../../../public/entre-sierras/1.jpg"
 import image2 from "../../../public/entre-sierras/2.jpg"
 import image4 from "../../../public/entre-sierras/4.jpg"

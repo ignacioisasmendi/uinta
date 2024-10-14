@@ -1,38 +1,19 @@
 'use client'
 
-import { useActionState } from 'react'
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { ChevronLeft, Upload, X } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { createProject } from "./actions"
-
+import { newProject } from "./actions"
+import { useFormState } from "react-dom"
+import SubmitButton from "@/components/app/submit-button"
 
 
 export default function CreateProjectPage() {
-  //const [state, formAction, isPending] = useActionState(createProject)
+  const [state, action] = useFormState(newProject, null)
 
   return (
     <div className="min-h-screen bg-primary text-white">
-      <header className="container mx-auto px-4 py-6 flex justify-between items-center">
-        <Link href="/" className="flex items-center space-x-2">
-          <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/uinta-logo-uEFNIKGYyvehNWfwr0gRHN7FGbpTOX.svg"
-            alt="Uinta Construcciones Logo"
-            width={150}
-            height={50}
-          />
-        </Link>
-        <Link href="/" className="text-[#FDC107] hover:text-[#FDC107]/80 flex items-center">
-          <ChevronLeft className="mr-2 h-4 w-4" />
-          Volver al inicio
-        </Link>
-      </header>
-
       <main className="container mx-auto px-4 py-12">
         <Card className="bg-white shadow-md">
           <CardHeader>
@@ -41,7 +22,7 @@ export default function CreateProjectPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <form className="space-y-6">
+            <form action={action} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-gray-700">Nombre del Proyecto</Label>
                 <Input
@@ -115,15 +96,8 @@ export default function CreateProjectPage() {
                   className="bg-gray-50 border-gray-300 text-gray-900 file:bg-[#FDC107] file:text-white file:border-0"
                 />
               </div>
-              {/* <Button type="submit" className="w-full bg-[#FDC107] text-white hover:bg-[#FDC107]/90" disabled={isPending}>
-                {isPending ? 'Creando Proyecto...' : 'Crear Proyecto'}
-              </Button> */}
+              <SubmitButton defaultText="Crear proyecto" pendingText="Creando proyecto" />
             </form>
-            {/* {state && (
-              <div className={`mt-4 p-4 rounded ${state.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                {state.message}
-              </div>
-            )} */}
           </CardContent>
         </Card>
       </main>

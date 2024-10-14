@@ -1,7 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { ChevronLeft } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 
 
 export default async function ProjectListingPage() {
@@ -13,23 +11,6 @@ export default async function ProjectListingPage() {
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
-      <header className="bg-white border-b border-gray-200 shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/uinta-logo-uEFNIKGYyvehNWfwr0gRHN7FGbpTOX.svg"
-              alt="Uinta Construcciones Logo"
-              width={120}
-              height={40}
-            />
-          </Link>
-          <Link href="/" className="text-gray-600 hover:text-gray-900 flex items-center transition-colors">
-            <ChevronLeft className="mr-2 h-4 w-4" />
-            Volver al inicio
-          </Link>
-        </div>
-      </header>
-
       <main className="container mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold mb-8 text-center">Proyectos</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

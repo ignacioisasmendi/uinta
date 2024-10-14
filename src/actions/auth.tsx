@@ -1,107 +1,86 @@
 "use server"
-import { SignupFormSchema, FormState } from '@/lib/zod/definitions'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import prisma from '@/lib/db'
+import { getUserByEmail, createUser} from '@/data-access/user'
+import { SignupFormSchema, LoginFormSchema } from '@/lib/zod/definitions'
 
-export async function signup(previousState: FormState, formData: FormData): Promise<FormState> {
-  const validatedFields = SignupFormSchema.safeParse({
-    firstName: formData.get('firstName'),
-    lastName: formData.get('lastName'),
-    email: formData.get('email'),
-    password: formData.get('password'),
-  })
- 
-  if (!validatedFields.success) {
-    return {
-      successful: false,
-      errors: validatedFields.error.flatten().fieldErrors,
-    }
+
+export async function signup(state:any, formData: FormData){
+
+  const user = {
+    firstName: formData.get('firstName') as string,
+    lastName: formData.get('lastName') as string,
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
   }
 
-  const user = validatedFields.data
-  const existingUser = await prisma.user.findUnique({
-    where: {
-      email: user.email,
-    },
-  })
+  const result = SignupFormSchema.safeParse(user);
+
+  if(!result.success){
+    let errorMessage = ""
+    result.error.issues.forEach((issue) => {
+      errorMessage += issue.path[0] + ': ' + issue.message + "\n"
+    })
+    return {successful: false, errors: errorMessage}
+  }
+  
+  await new Promise (resolve => setTimeout(resolve, 2000))
+
+  const existingUser = await getUserByEmail(user.email)
 
   if (existingUser) {
-    return {
-      successful: false,
-      errors: {
-        email: ['Email already exists'],
-      },
-    }
+    console.log({successful: false, errors: "Correo electronico ya registrado"});
+    return {successful: false, errors: "Correo electronico ya registrado"}
   }
 
   user.password = await bcrypt.hash(user.password, 10)
-  await prisma.user.create({
-    data: {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      password: user.password,
-    }
-  }); 
+  await createUser(user)
 
-  return { successful: true, message: 'User created successfully' }
+  return {successful: true, errors: ""}
 }
 
-export async function login(previousState: FormState, formData: FormData): Promise<FormState> {
-  const email = formData.get('email') as string
-  const password = formData.get('password') as string
-
-  if (!email || !password) {
-    return {
-      successful: false,
-      errors: {
-        email: ['Email and password are required'],
-      },
-    }
+export async function login(state: any, formData: FormData) {
+  
+  const user = {
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
   }
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-  })
+  const result = LoginFormSchema.safeParse(user);
 
-  if (!user) {
+  if(!result.success){
+    let errorMessage = ""
+    result.error.issues.forEach((issue) => {
+      errorMessage += issue.path[0] + ': ' + issue.message + "\n"
+    })
+    return {successful: false, errors: errorMessage}
+  }
+
+  const resultUser = await getUserByEmail(user.email)
+  
+  if (!resultUser) {
     return {
       successful: false,
-      errors: {
-        email: ['User not found'],
-      },
+      errors: "Correo electronico no registrado",
     }
   }  
 
-  const validPassword = await bcrypt.compare(password, user.password)
-  console.log(validPassword);
-  
+  const validPassword = await bcrypt.compare(user.password, resultUser.password )
   if (!validPassword) {
     return {
       successful: false,
-      errors: {
-        password: ['Invalid password'],
-      },
+      errors: "Contraseña incorrecta",
     }
   }
 
   const jwtSecret: string | undefined = process.env.JWT_SECRET
-  
   if (!jwtSecret) {
     return {
-      successful: false,
-      errors: {
-        password: ['Server configuration error'],
-      },
+      successful: false
     }
   }
 
-  const accessToken: string = jwt.sign({ email: user.email }, jwtSecret, { expiresIn: '1h' })
-  console.log(accessToken);
-  
+  const accessToken: string = jwt.sign({ email: user.email }, jwtSecret , { expiresIn: '1h' })  
   
   return { successful: true, token: accessToken }
 } 

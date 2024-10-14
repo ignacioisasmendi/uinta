@@ -1,18 +1,19 @@
 "use client"
+import { signup } from '@/actions/auth'
+import SubmitButton from '@/components/app/submit-button'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Loader2, Lock, Mail, User, CheckCircle2 } from "lucide-react"
-import { signup } from '@/actions/auth'
-import {useFormState} from 'react-dom'
-import { FormState } from '@/lib/zod/definitions'
+import { CheckCircle2, Lock, Mail, User } from "lucide-react"
 import { useRouter } from 'next/navigation'
+import { useFormState } from 'react-dom'
+import toast from 'react-hot-toast'
+
+
 
 export default function SignUpForm() {
-  const initialState: FormState = { message: '', errors: {} };
-  const [state, action, isPending] = useFormState(signup, initialState)
-
-  const router = useRouter()
+  const [state, action] = useFormState(signup, null)
+  const router = useRouter()  
 
   if (state?.successful == true) {
     return (
@@ -28,6 +29,10 @@ export default function SignUpForm() {
           </Button>
       </div>
     )
+  }
+
+  if (state?.errors) {
+    toast.error(state.errors)  
   }
 
   return (
@@ -50,12 +55,10 @@ export default function SignUpForm() {
                 name="firstName"
                 type="text"
                 autoComplete="given-name"
-                required
                 className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
                 placeholder="Nombre"
               />
             </div>
-            {state?.errors?.firstName && <p>{state.errors.firstName}</p>}
           </div>
           <div>
             <Label htmlFor="last name" className="sr-only">
@@ -70,15 +73,13 @@ export default function SignUpForm() {
                 name="lastName"
                 type="text"
                 autoComplete="family-name"
-                required
                 className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
                 placeholder="Apellido"
               />
             </div>
-            {state?.errors?.lastName && <p>{state.errors.lastName}</p>}
           </div>
           <div>
-            <Label htmlFor="email" className="sr-only">
+            <Label className="sr-only">
               Correo electrónico
             </Label>
             <div className="relative">
@@ -88,15 +89,12 @@ export default function SignUpForm() {
               <Input
                 id="email"
                 name="email"
-                type="email"
                 autoComplete="email"
-                required
                 className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
                 placeholder="Correo electrónico"
               />
             </div>
           </div>
-          {state?.errors?.email && <p>{state.errors.email}</p>}
           <div>
             <Label htmlFor="password" className="sr-only">
               Contraseña
@@ -110,40 +108,18 @@ export default function SignUpForm() {
                 name="password"
                 type="password"
                 autoComplete="new-password"
-                required
                 className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
                 placeholder="Contraseña"
               />
             </div>
           </div>
         </div>
-        {state?.errors?.password && (
-          <div>
-            <p>La contraseña debe:</p>
-            <ul>
-              {state.errors.password.map((error) => (
-                <li key={error}>- {error}</li>
-              ))}
-            </ul>
-          </div>
-        )}
         <div>
-        <Button 
-            type="submit" 
-            className="w-full bg-[#FDC107] hover:bg-[#FDC107]/90 text-black"
-            disabled={isPending}
-          >
-            {isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Registrando...
-              </>
-            ) : (
-              'Registrar'
-            )}
-          </Button>
+          <SubmitButton defaultText='Registrar' pendingText='Registrando...'/>
         </div>
       </form>
     </>
   )
 }
+
+

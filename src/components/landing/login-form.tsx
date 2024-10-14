@@ -1,24 +1,29 @@
-import { Button} from "@/components/ui/button"
+"use client"
+import { login } from '@/actions/auth'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Lock, Mail, Loader2 } from "lucide-react"
-import { login } from '@/actions/auth'
+import { Lock, Mail } from "lucide-react"
 import { useRouter } from 'next/navigation'
-import { FormState } from '@/lib/zod/definitions'
-import { useActionState } from "react"
+import { useFormState } from "react-dom"
+import { toast } from "react-hot-toast"
+import SubmitButton from '@/components/app/submit-button'
+
+
 
 
 export default function LoginForm() {
-  const initialState: FormState = { message: '', errors: {} };
-  const [state, action, isPending] = useActionState(login, initialState)
+  const [state, action] = useFormState(login, null)
   const router = useRouter()
 
 
   if(state?.token) {
     localStorage.setItem('token', state.token)
-    router.push('/admin')
+    router.push('/project-listing')
   }
 
+  if (state?.errors) {
+    toast.error(state.errors)  
+  }
 
   return (
     <form className="mt-8 space-y-6" action={action}>
@@ -34,9 +39,7 @@ export default function LoginForm() {
             <Input
               id="email"
               name="email"
-              type="email"
               autoComplete="email"
-              required
               className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
               placeholder="Dirección de correo electrónico"
             />
@@ -55,7 +58,6 @@ export default function LoginForm() {
               name="password"
               type="password"
               autoComplete="current-password"
-              required
               className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
               placeholder="Contraseña"
             />
@@ -63,21 +65,7 @@ export default function LoginForm() {
         </div>
       </div>
       <div>
-      {state?.errors?.email && <p>{state.errors.email}</p>}
-      <Button 
-            type="submit" 
-            className="w-full bg-[#FDC107] hover:bg-[#FDC107]/90 text-black"
-            disabled={isPending}
-          >
-            {isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Iniciando sesión...
-              </>
-            ) : (
-              'Iniciar sesión'
-            )}
-        </Button>
+        <SubmitButton defaultText='Iniciar Sesion' pendingText='Iniciando sesion...'/>
       </div>
     </form>
   )

@@ -5,10 +5,10 @@ import { ChevronRight, Star} from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import image from "../public/image1.jpg"
-import Footer from "@/components/custom/footer"
-import Header from "@/components/custom/header"
-import Portfolio from "@/components/custom/portfolio"
-import Benefits from "@/components/custom/benefits"
+import Footer from "@/components/landing/footer"
+import Header from "@/components/landing/header"
+import Portfolio from "@/components/landing/portfolio"
+import Benefits from "@/components/landing/benefits"
 
 export default function LandingPage() {
 
