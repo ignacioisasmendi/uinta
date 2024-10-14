@@ -2,7 +2,6 @@
 
 //import { addProject } from "@/models/projects"
 import {S3Client, PutObjectCommand} from "@aws-sdk/client-s3"
-import { CreateProjectSchema } from "@/lib/zod/definitions"
 import { createProject } from "@/data-access/project"
 import { getSignedUrl} from "@aws-sdk/s3-request-presigner"
 
@@ -15,30 +14,19 @@ const s3 = new S3Client({
 })
 
 
-export async function newProject(state:any, formData: FormData) {
+export async function newProject(formData: FormData) {
 
   const project = {
-    name: formData.get('name'),
-    duration: formData.get('duration'),
-    people: formData.get('people'),
-    area: formData.get('area'),
-    description: formData.get('description'),
-    mainImage: formData.get('mainImage'),
-    images: formData.getAll('images')
-  }
+    name: formData.get('name') as string,
+    slug: (formData.get('name') as string).toLowerCase().replace(/\s+/g, '-'),
+    duration: parseInt(formData.get('duration') as string, 10) || 0, 
+    people: parseInt(formData.get('people') as string, 10) || 0,
+    area: parseFloat(formData.get('area') as string) || 0, 
+    description: formData.get('description') as string,
+  };
 
-  const signedUrl = await getSignedURL()
-  console.log(signedUrl);
+  const { id: projectId } = await createProject(project);
   
-  const result = CreateProjectSchema.safeParse(project)
-
-  if (!result.success) {
-    return { success: false, message: result.error.message }
-  }
-  
-  await createProject(project)
-
-
 
   return { success: true, message: 'Project created successfully!' }
 }
@@ -46,7 +34,7 @@ export async function newProject(state:any, formData: FormData) {
 
 
 
-async function getSignedURL () {
+export async function getSignedURL () {
   
   const putObjectCommand = new PutObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME!,
@@ -54,7 +42,7 @@ async function getSignedURL () {
   })
 
   const signedUrl = getSignedUrl(s3, putObjectCommand, {
-    expiresIn: 3600 
+    expiresIn: 60 
   })
 
   return signedUrl

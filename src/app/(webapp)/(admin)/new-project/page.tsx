@@ -4,13 +4,50 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { newProject } from "./actions"
+import { newProject, getSignedURL } from "./actions"
 import { useFormState } from "react-dom"
 import SubmitButton from "@/components/app/submit-button"
+import { CreateProjectSchema } from "@/lib/zod/definitions"
 
 
 export default function CreateProjectPage() {
-  const [state, action] = useFormState(newProject, null)
+  const [state, action] = useFormState(clientSideValidation, null)
+
+  async function clientSideValidation(state:any, formData: FormData) {
+
+    const project = {
+      name: formData.get('name'),
+      duration: formData.get('duration'),
+      people: formData.get('people'),
+      area: formData.get('area'),
+      description: formData.get('description'),
+      mainImage: formData.get('mainImage'),
+      images: formData.getAll('images')
+    }
+  
+    const result = CreateProjectSchema.safeParse(project)
+  
+    if(!result.success){
+      let errorMessage = ""
+      result.error.issues.forEach((issue) => {
+        errorMessage += issue.path[0] + ': ' + issue.message + "\n"
+      })
+      console.log(errorMessage);
+      return {successful: false, errors: errorMessage}
+    }
+        
+    await newProject(formData)
+
+    const images = {
+      mainImage: project.mainImage,
+      images: project.images
+    }
+    
+    const signedUrl = await getSignedURL()
+    console.log(signedUrl);
+    return { success: true, message: 'Project created successfully!' }
+
+  }
 
   return (
     <div className="min-h-screen bg-primary text-white">
