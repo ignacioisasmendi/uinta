@@ -42,7 +42,7 @@ const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/web
 export const CreateProjectSchema = z.object({
   name: z.string().min(1, "El nombre del proyecto es requerido"),
   duration: z.coerce.number().positive("La duración debe ser un número positivo"),
-  people: z.coerce.number().int().positive("La cantidad de personas debe ser un número entero positivo"),
+  location: z.string().min(1, "La ubicacion es requerida"),
   area: z.coerce.number().positive("El área debe ser un número positivo"),
   description: z.string().min(10, "La descripción debe tener al menos 10 caracteres"),
 });

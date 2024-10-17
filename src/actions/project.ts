@@ -1,6 +1,5 @@
 "use server"
 
-//import { addProject } from "@/models/projects"
 import {S3Client, PutObjectCommand} from "@aws-sdk/client-s3"
 import { createProject } from "@/data-access/project"
 import { createImage } from "@/data-access/image"
@@ -41,8 +40,6 @@ export async function newProject(formData: FormData) {
 
 export async function newImage(imageURL: string, projectId: number) {
   try {
-    console.log("I am here");
-    
     const image = {
       url: imageURL,
       projectId: projectId

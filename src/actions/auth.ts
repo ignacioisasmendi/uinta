@@ -24,7 +24,6 @@ export async function signup(state:any, formData: FormData){
     return {successful: false, errors: errorMessage}
   }
   
-  await new Promise (resolve => setTimeout(resolve, 2000))
 
   const existingUser = await getUserByEmail(user.email)
 
