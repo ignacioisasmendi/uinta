@@ -45,19 +45,4 @@ export const CreateProjectSchema = z.object({
   people: z.coerce.number().int().positive("La cantidad de personas debe ser un número entero positivo"),
   area: z.coerce.number().positive("El área debe ser un número positivo"),
   description: z.string().min(10, "La descripción debe tener al menos 10 caracteres"),
-  mainImage: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
-  .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),"Solo archivos de formato .jpg, .jpeg, .png and .webp son permitidos"),
-  images: z.array(z.any())
-    .optional()
-    .refine(
-      (files) => files?.every((file) => file.size <= MAX_FILE_SIZE),
-      "El tamaño máximo de archivo es 5MB por cada imagen."
-    )
-    .refine(
-      (files) =>
-        files?.every((file) =>
-          ACCEPTED_IMAGE_TYPES.includes(file.type)
-        ),
-      "Solo archivos de formato .jpg, .jpeg, .png and .webp son permitidos"
-    ),
 });

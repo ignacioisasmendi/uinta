@@ -1,5 +1,5 @@
 "use server"
-import { SignupFormSchema, FormState } from '@/lib/zod/definitions'
+import { SignupFormSchema } from '@/lib/zod/definitions'
 //import { User, addUser, getUserByEmail } from '@/models/user'
 import bcrypt from 'bcrypt'
 //import { addProject } from "@/models/projects"
@@ -13,7 +13,7 @@ import {S3Client, PutObjectCommand} from "@aws-sdk/client-s3"
   }
 }) */
 
- 
+ /* 
 export async function createProject(previousState: FormState, formData: FormData) {
 
   const project = {
@@ -27,5 +27,5 @@ export async function createProject(previousState: FormState, formData: FormData
 
   return {sucessfull: true}
  
-}
+} */
 

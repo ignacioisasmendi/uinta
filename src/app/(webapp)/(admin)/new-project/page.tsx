@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { newProject, getSignedURL } from "./actions"
+import { newProject, getSignedURL, newImage } from "./actions"
 import { useFormState } from "react-dom"
 import SubmitButton from "@/components/app/submit-button"
 import { CreateProjectSchema } from "@/lib/zod/definitions"
@@ -13,40 +13,66 @@ import { CreateProjectSchema } from "@/lib/zod/definitions"
 export default function CreateProjectPage() {
   const [state, action] = useFormState(clientSideValidation, null)
 
-  async function clientSideValidation(state:any, formData: FormData) {
-
+  async function clientSideValidation(state: any, formData: FormData) {
+    
     const project = {
       name: formData.get('name'),
       duration: formData.get('duration'),
       people: formData.get('people'),
       area: formData.get('area'),
       description: formData.get('description'),
-      mainImage: formData.get('mainImage'),
-      images: formData.getAll('images')
-    }
+    };
   
-    const result = CreateProjectSchema.safeParse(project)
+    const images = formData.getAll('images') as File[];
   
-    if(!result.success){
-      let errorMessage = ""
+    const result = CreateProjectSchema.safeParse(project);
+  
+    if (!result.success) {
+      let errorMessage = '';
       result.error.issues.forEach((issue) => {
-        errorMessage += issue.path[0] + ': ' + issue.message + "\n"
-      })
+        errorMessage += `${issue.path[0]}: ${issue.message}\n`;
+      });
       console.log(errorMessage);
-      return {successful: false, errors: errorMessage}
+      return { successful: false, errors: errorMessage };
     }
-        
-    await newProject(formData)
+  
+    try {
+      const projectResult = await newProject(formData);
+  
+      if (!projectResult || !projectResult.projectId) {
+        return { success: false, message: 'Failed to create project' };
+      }
+  
+      for (const image of images) {
+        try {
+          const signedUrlResult = await getSignedURL(image.type, image.size, projectResult.projectId);
+          if (!signedUrlResult.success) {
+            return { success: false, message: signedUrlResult.failure };
+          }
 
-    const images = {
-      mainImage: project.mainImage,
-      images: project.images
+          const uploadResponse = await fetch(signedUrlResult.success.url, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': image.type, 
+            },
+            body: image,
+          });
+  
+          console.log(signedUrlResult.success.url);
+          
+          await newImage(signedUrlResult.success.url.split('?')[0], projectResult.projectId);
+  
+        } catch (imageError) {
+          return { success: false, message: "Error processing image" };
+        }
+      }
+  
+      return { success: true, message: 'Project created successfully!' };
+  
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, message: `Error creating project: ${errorMessage}` };
     }
-    
-    const signedUrl = await getSignedURL()
-    console.log(signedUrl);
-    return { success: true, message: 'Project created successfully!' }
-
   }
 
   return (
@@ -112,18 +138,7 @@ export default function CreateProjectPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="mainImage" className="text-gray-700">Imagen Principal</Label>
-                <Input
-                  id="mainImage"
-                  name="mainImage"
-                  type="file"
-                  accept="image/*"
-                  required
-                  className="bg-gray-50 border-gray-300 text-gray-900 file:bg-[#FDC107] file:text-white file:border-0"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="images" className="text-gray-700">Imágenes Adicionales</Label>
+                <Label htmlFor="images" className="text-gray-700">Imágenes</Label>
                 <Input
                   id="images"
                   name="images"

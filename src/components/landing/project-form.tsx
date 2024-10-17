@@ -6,13 +6,10 @@ import { Lock, Mail, Loader2 } from "lucide-react"
 import { useFormState } from 'react-dom'
 import { login } from '@/actions/auth'
 import { useRouter } from 'next/navigation'
-import { FormState } from '@/lib/zod/definitions'
 
 
 export default function CreateProjectForm() {
-  const initialState: FormState = { message: '', errors: {} };
-  const [state, action, isPending] = useFormState(login, initialState)
-  const router = useRouter()
+
 
 
   return (
