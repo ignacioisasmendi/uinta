@@ -28,6 +28,8 @@ export default function NewProjectForm() {
         area: formData.get('area'),
         description: formData.get('description'),
       };
+      console.log(project);
+      
   
       // Get images
       const images = formData.getAll('images') as File[];
@@ -110,7 +112,7 @@ export default function NewProjectForm() {
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="people" className="text-gray-700">Ubicacion</Label>
+        <Label htmlFor="location" className="text-gray-700">Ubicacion</Label>
         <Input
           id="location"
           name="location"

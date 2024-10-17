@@ -13,7 +13,7 @@ export default function Header() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return(
-    <header className="sticky top-0 z-50 w-full border-b border-[#FDC107]/20 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/60">
+    <header className="sticky top-0 z-50 w-full bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-primary/60">
       <div className="w-full flex px-4 md:px-16 h-16 justify-between ">
         <div>
           <Image src={logo} className="w-auto h-16" alt="logo"></Image>

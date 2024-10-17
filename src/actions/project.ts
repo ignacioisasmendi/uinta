@@ -23,12 +23,15 @@ export async function newProject(formData: FormData) {
       name: formData.get('name') as string,
       slug: (formData.get('name') as string).toLowerCase().replace(/\s+/g, '-'),
       duration: parseInt(formData.get('duration') as string, 10) || 0, 
-      people: parseInt(formData.get('people') as string, 10) || 0,
+      location: formData.get('location') as string,
       area: parseFloat(formData.get('area') as string) || 0, 
       description: formData.get('description') as string,
     };
 
+    console.log(project);
+    
     const { id: projectId } = await createProject(project);
+    
     
     return {success: true, projectId: projectId};
   

@@ -18,7 +18,7 @@ export default function Portfolio() {
   ]
 
   return (
-    <section className="w-full px-4 md:px-16 py-12 md:py-24 lg:py-32 bg-black">
+    <section className="w-full px-4 md:px-16 py-12 md:py-24 lg:py-32 bg-black/95">
       <div className="container">
         <div className="flex flex-col md:flex-row justify-center items-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white mb-4 md:mb-0">
@@ -27,7 +27,7 @@ export default function Portfolio() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {portfolioItems.map((item) => (
-            <Card key={item.id} className="bg-gray-900 border-none overflow-hidden group">
+            <Card key={item.id} className="bg-[#272c2d] border-none overflow-hidden group">
               <CardContent className="p-0">
                 <div className="relative aspect-video overflow-hidden">
                   <Image
