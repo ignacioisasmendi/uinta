@@ -1,58 +1,89 @@
 'use client'
-import { useState } from 'react'
+
 import { Button } from "@/components/ui/button"
-import { Menu, X} from "lucide-react"
+import { Menu, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import logo from "../../public/uinta-logo.svg"
+import logo from "../../public/Logo cd.2.png"
+import { useState, useEffect } from 'react'
 
+type Props = {
+  colorDefault: string;
+  colorScroll: string;
+};
 
-export default function Header() {
-
+export default function Header({ colorDefault, colorScroll }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
-  return(
-    <header className="sticky top-0 z-50 w-full bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-primary/60">
-      <div className="w-full flex px-4 md:px-16 h-16 justify-between ">
-        <div>
-          <Image src={logo} className="w-auto h-16" alt="logo"></Image>
-        </div>
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
-            Nosotros
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    handleScroll()
+    handleResize()
+
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  const headerColor = isScrolled ? colorScroll : colorDefault
+
+  return (
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${headerColor}`}>
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center h-20">
+          <Link href="/" className="flex items-center">
+            <Image src={logo} alt="Uinta construcciones logo" className="w-auto h-36" />
           </Link>
-          <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
-            Portfolio
-          </Link>
-          <Link className="text-sm font-medium hover:text-[#FDC107] transition-colors" href="#">
-            Contacto
-          </Link>
-          <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90">Solicitar cotizacion</Button>
-        </nav>
-        <div className="md:hidden flex items-center">
-          <Button variant="ghost" size="icon" onClick={toggleMenu} aria-label="Toggle menu">
-            {isMenuOpen ? <X className="h-12 w-12" /> : <Menu className="h-12 w-12" />}
-          </Button>
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link className={`text-xl font-medium hover:underline-[#FDC107]`} href="#">
+              Nosotros
+            </Link>
+            <Link className={`text-xl font-medium hover:underline-[#FDC107]`} href="#">
+              Portfolio
+            </Link>
+            <Link className={`text-xl font-medium hover:underline-[#FDC107]`} href="#">
+              Contacto
+            </Link>
+            <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90" variant="secondary">Solicitar cotizacion</Button>
+          </nav>
+          <div className="md:hidden">
+            <Button variant="ghost" size="icon" onClick={toggleMenu} aria-label="Toggle menu">
+              {isMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+            </Button>
+          </div>
         </div>
       </div>
       {isMenuOpen && (
-        <div className="md:hidden">
-          <nav className="flex flex-col items-center space-y-4 py-4">
-            <Link className="text-sm font-medium hover:text-secondary transition-colors" href="#">
+        <div className={`md:hidden shadow border-t-[#FDC107] ${isMobile ? colorScroll : 'bg-bg-black/95'}`}>
+          <nav className="flex flex-col items-center space-y-9 py-4">
+            <Link className="text-lg font-medium hover:underline" href="#">
               Nosotros
             </Link>
-            <Link className="text-sm font-medium hover:text-secondary transition-colors" href="#">
+            <Link className="text-lg font-medium hover:underline" href="#">
               Portfolio
             </Link>
-            <Link className="text-sm font-medium hover:text-secondary transition-colors" href="#">
+            <Link className="text-lg font-medium hover:underline" href="#">
               Contacto
             </Link>
-            <Button className="bg-secondary text-primary-foreground hover:bg-secondary/90">Solicitar cotizacion</Button>
+            <Button className="bg-[#FDC107] text-black" variant="secondary">Solicitar cotizacion</Button>
           </nav>
         </div>
       )}
     </header>
   )
 }
-

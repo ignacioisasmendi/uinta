@@ -48,9 +48,10 @@ export default function Benefits() {
     <section className="w-full py-12 md:py-24 lg:py-32 bg-black/90">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white mb-4">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white mb-2">
             Beneficios del sistema SIP
           </h2>
+          <div className="w-24 h-1 bg-[#FDC107] mx-auto mb-8"></div>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Descubre por qué los Paneles Aislados Estructurales están revolucionando la industria de la construcción.
           </p>

@@ -20,11 +20,12 @@ export default function Portfolio() {
   return (
     <section className="w-full px-4 md:px-16 py-12 md:py-24 lg:py-32 bg-black/95">
       <div className="container">
-        <div className="flex flex-col md:flex-row justify-center items-center mb-12">
+        <div className="flex flex-col md:flex-row justify-center items-center mb-2">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white mb-4 md:mb-0">
             Nuestro Portfolio
           </h2>
         </div>
+        <div className="w-24 h-1 bg-[#FDC107] mx-auto mb-12"></div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {portfolioItems.map((item) => (
             <Card key={item.id} className="bg-[#272c2d] border-none overflow-hidden group">

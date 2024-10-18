@@ -1,11 +1,14 @@
 "use client"
+
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar, Home, Clock, Ruler, Users, Lightbulb, Leaf, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Calendar, Home, Clock, Ruler, BrickWall, MapPin, Lightbulb, Leaf, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import Header from '@/components/landing/header'
 import Footer from '@/components/landing/footer'
 import image1 from "../../../public/entre-sierras/1.jpg"
@@ -16,19 +19,23 @@ import image6 from "../../../public/entre-sierras/6.jpg"
 import image7 from "../../../public/entre-sierras/4.jpg"
 import placeHolderImage from "../../../public/placeholder.svg"
 
-
 export default function ProjectDetail() {
-  const [currentImage, setCurrentImage] = useState(0)
   const images = [
-    image1, image2, image4, image5, image6, image7
+    image6, image1, image2, image4, image5, image7
   ]
 
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % images.length)
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null)
+
+  const handleNextImage = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((selectedImageIndex + 1) % images.length)
+    }
   }
 
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + images.length) % images.length)
+  const handlePreviousImage = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((selectedImageIndex - 1 + images.length) % images.length)
+    }
   }
 
   const timelineSteps = [
@@ -40,10 +47,10 @@ export default function ProjectDetail() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#111] text-white">
-      <Header></Header>
+    <div className="min-h-screen bg-black/90 text-white">
+      <Header colorDefault="bg-black/95 shadow" colorScroll="bg-black/95 shadow"/>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-24">
         <Link href="/" className="inline-flex items-center text-[#FDC107] hover:underline mb-6">
           <ChevronLeft className="mr-2 h-4 w-4" />
           Volver a Home
@@ -52,29 +59,72 @@ export default function ProjectDetail() {
         <h1 className="text-4xl font-bold mb-6">Entre Sierras</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <div className="relative aspect-video">
-            <Image
-              src={images[currentImage]}
-              alt={`Project image ${currentImage + 1}`}
-              className="max-w-full h-auto object-cover rounded-lg"
-            />
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white"
-              onClick={prevImage}
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white"
-              onClick={nextImage}
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
+          <Carousel className="w-full">
+            <CarouselContent>
+              {images.map((image, index) => (
+                <CarouselItem key={index}>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <div className="relative aspect-video cursor-pointer overflow-hidden rounded-lg">
+                        <div className="absolute inset-0 bg-cover bg-center blur-md scale-110" style={{ backgroundImage: `url(${image.src})` }} />
+                        <div className="relative aspect-video flex items-center justify-center">
+                          <Image
+                            src={image}
+                            alt={`Project image ${index + 1}`}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                      </div>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-[75vw] max-h-[75vh] p-0">
+                      <div className="relative aspect-video cursor-pointer overflow-hidden rounded-lg">
+                        <div className="absolute inset-0 bg-cover bg-center blur-md scale-110" style={{ backgroundImage: `url(${images[selectedImageIndex ?? index].src})` }} />
+                        <div className="relative aspect-video flex items-center justify-center">
+                          <Image
+                            src={images[selectedImageIndex ?? index]}
+                            alt={`Project image ${(selectedImageIndex ?? index) + 1}`}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                          {images.map((_, i) => (
+                            <button
+                              key={i}
+                              onClick={() => setSelectedImageIndex(i)}
+                              className={`w-12 h-12 rounded-md overflow-hidden border-2 ${i === (selectedImageIndex ?? index) ? 'border-[#FDC107]' : 'border-transparent'}`}
+                            >
+                              <Image
+                                src={images[i]}
+                                alt={`Thumbnail ${i + 1}`}
+                                width={48}
+                                height={48}
+                                className="object-cover w-full h-full"
+                              />
+                            </button>
+                          ))}
+                        </div>
+                        <button
+                          onClick={() => handlePreviousImage}
+                          className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white p-2 rounded-full"
+                        >
+                          <ChevronLeft className="h-6 w-6" />
+                        </button>
+                        <button
+                          onClick={() => handleNextImage}
+                          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white p-2 rounded-full"
+                        >
+                          <ChevronRight className="h-6 w-6"/>
+                        </button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white" />
+            <CarouselNext className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white" />
+          </Carousel>
+
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <Card className="bg-gray-800 border-gray-700">
@@ -97,19 +147,19 @@ export default function ProjectDetail() {
               </Card>
               <Card className="bg-gray-800 border-gray-700">
                 <CardContent className="flex items-center p-4">
-                  <Users className="h-5 w-5 mr-2 text-[#FDC107]" />
+                  <BrickWall className="h-5 w-5 mr-2 text-[#FDC107]" />
                   <div>
-                    <p className="text-sm text-gray-400">Trabajadores</p>
-                    <p className="font-semibold">4-6 people</p>
+                    <p className="text-sm text-gray-400">Sistema constructivo</p>
+                    <p className="font-semibold">SIP</p>
                   </div>
                 </CardContent>
               </Card>
               <Card className="bg-gray-800 border-gray-700">
                 <CardContent className="flex items-center p-4">
-                  <Lightbulb className="h-5 w-5 mr-2 text-[#FDC107]" />
+                  <MapPin className="h-5 w-5 mr-2 text-[#FDC107]" />
                   <div>
-                    <p className="text-sm text-gray-400">Ahorro de energia</p>
-                    <p className="font-semibold">A+</p>
+                    <p className="text-sm text-gray-400">Ubicacion</p>
+                    <p className="font-semibold">Tandil, Buenos Aires</p>
                   </div>
                 </CardContent>
               </Card>
@@ -119,14 +169,12 @@ export default function ProjectDetail() {
               Built using our advanced SIP system, this home offers exceptional energy efficiency and a 
               reduced carbon footprint without compromising on style or functionality.
             </p>
-            <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90">Request Similar Project</Button>
           </div>
         </div>
 
         <Tabs defaultValue="features" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="features">Features</TabsTrigger>
-            <TabsTrigger value="sustainability">Sustainability</TabsTrigger>
             <TabsTrigger value="timeline">Project Timeline</TabsTrigger>
           </TabsList>
           <TabsContent value="features" className="mt-4">
@@ -140,33 +188,6 @@ export default function ProjectDetail() {
                   <li>Home office/flex space for remote work or guests</li>
                   <li>Outdoor living area with sustainable landscaping</li>
                 </ul>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="sustainability" className="mt-4">
-            <Card className="bg-gray-800 border-gray-700">
-              <CardContent className="p-6 space-y-4">
-                <div className="flex items-start">
-                  <Leaf className="h-5 w-5 mr-2 text-[#FDC107] mt-1" />
-                  <div>
-                    <h3 className="font-semibold">SIP System Benefits</h3>
-                    <p className="text-gray-300">Superior insulation, airtight construction, and reduced thermal bridging result in up to 60% energy savings compared to traditional builds.</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <Lightbulb className="h-5 w-5 mr-2 text-[#FDC107] mt-1" />
-                  <div>
-                    <h3 className="font-semibold">Renewable Energy Integration</h3>
-                    <p className="text-gray-300">Roof-mounted solar panels provide clean energy, meeting up to 80% of the home's electricity needs.</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <Home className="h-5 w-5 mr-2 text-[#FDC107] mt-1" />
-                  <div>
-                    <h3 className="font-semibold">Smart Home Technology</h3>
-                    <p className="text-gray-300">Integrated systems for climate control, lighting, and energy management optimize resource use and comfort.</p>
-                  </div>
-                </div>
               </CardContent>
             </Card>
           </TabsContent>
@@ -222,7 +243,6 @@ export default function ProjectDetail() {
       </main>
 
       <Footer/>
-      
     </div>
   )
 }

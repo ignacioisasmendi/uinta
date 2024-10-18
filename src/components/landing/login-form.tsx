@@ -40,7 +40,7 @@ export default function LoginForm() {
               id="email"
               name="email"
               autoComplete="email"
-              className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
+              className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107] text-black"
               placeholder="Dirección de correo electrónico"
             />
           </div>
