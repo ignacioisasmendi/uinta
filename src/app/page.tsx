@@ -6,7 +6,7 @@ import Header from "@/components/landing/header"
 import Portfolio from "@/components/landing/portfolio"
 import Benefits from "@/components/landing/benefits"
 import Servicios from "@/components/landing/servicios"
-import backgroundImage from "@/public/hero-image.jpg"
+import backgroundImage from "../../../public/hero-image1.jpg"
 
 export default function LandingPage() {
 
