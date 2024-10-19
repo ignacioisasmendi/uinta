@@ -22,7 +22,7 @@ export default function Portfolio() {
       <div className="container">
         <div className="flex flex-col md:flex-row justify-center items-center mb-2">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white mb-4 md:mb-0">
-            Nuestro Portfolio
+            Nuestras Obras
           </h2>
         </div>
         <div className="w-24 h-1 bg-[#FDC107] mx-auto mb-12"></div>
@@ -40,10 +40,10 @@ export default function Portfolio() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-{/*                   <p className="text-gray-400 mb-4">{item.description}</p>
- */}                  <Link href={`/project/${item.id}`} passHref>
+                  {/*<p className="text-gray-400 mb-4">{item.description}</p>*/}                  
+                  <Link href={`/project/${item.id}`} passHref>
                     <Button variant="link" className="text-[#FDC107] hover:text-[#FDC107]/80 p-0 group">
-                      Ver Proyecto
+                      Ver Obra
                       <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </Link>
@@ -54,8 +54,8 @@ export default function Portfolio() {
         </div>
         <div className="flex justify-center mt-12">
         <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90 flex items-center">
-            Ver mas proyectos
-            <ArrowRight className="ml-2 h-4 w-4" />
+          Ver mas obras
+          <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
         </div>
       </div>

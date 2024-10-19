@@ -15,7 +15,7 @@ export default function Footer() {
               <Image src={logo} className="w-auto h-16" alt="logo"></Image>
             </div>
             <p className="text-sm text-gray-400">
-              Construyendo hogares sostenibles y energéticamente eficientes con tecnología de Paneles Aislados Estructurales.
+              Construyendo hogares sostenibles y energéticamente eficientes con madera y tecnología.
             </p>
             <div className="flex space-x-4">
               <Link href="https://www.instagram.com/uintaconstrucciones/" className="text-gray-400 hover:text-[#FDC107]">
@@ -42,7 +42,7 @@ export default function Footer() {
               {/* <li className="flex items-start text-gray-400">
                 <MapPin size={16} className="mr-2 mt-1 text-[#FDC107]" />
                 <address className="not-italic">
-                  123 Eco Street, Green City,<br />Sustainable State 12345
+                  Rodriguez 123, Tandil,<br />Buenos Aires
                 </address>
               </li> */}
             </ul>

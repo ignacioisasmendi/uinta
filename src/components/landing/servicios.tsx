@@ -10,7 +10,7 @@ interface ServiceItemProps {
 
 export default function ServicesSection() {
   return (
-    <section className="bg-black/90 text-white py-16 px-4 md:px-8">
+    <section id="next-section" className="bg-black/90 text-white py-16 px-4 md:px-8">
       <div className="container mx-auto"> 
         <div className="text-center">
           <h2 className="text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white mb-2">

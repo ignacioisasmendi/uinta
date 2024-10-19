@@ -43,7 +43,7 @@ export default function Header({ colorDefault, colorScroll }: Props) {
   const headerColor = isScrolled ? colorScroll : colorDefault
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${headerColor}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 md:transition-colors md:duration-300 ${headerColor} ${isMobile && isMenuOpen ? '!bg-black/95 ' : ''}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           <Link href="/" className="flex items-center">
@@ -69,7 +69,7 @@ export default function Header({ colorDefault, colorScroll }: Props) {
         </div>
       </div>
       {isMenuOpen && (
-        <div className={`md:hidden shadow border-t-[#FDC107] ${isMobile ? colorScroll : 'bg-bg-black/95'}`}>
+        <div className={`md:hidden shadow border-t-[#FDC107] ${isMobile ? colorScroll : 'bg-black/95'}`}>
           <nav className="flex flex-col items-center space-y-9 py-4">
             <Link className="text-lg font-medium hover:underline" href="#">
               Nosotros

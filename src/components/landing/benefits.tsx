@@ -8,32 +8,32 @@ export default function Benefits() {
     {
       title: "Eficiencia Energética",
       icon: <Zap className="h-6 w-6 text-[#FDC107]" />,
-      description: "Las casas construidas con SIP son increíblemente eficientes energéticamente, reduciendo los costos de calefacción y refrigeración.",
-      details: "La construcción con SIP crea una envolvente del edificio herméticamente sellada, minimizando las fugas de aire y los puentes térmicos. Esto resulta en una reducción de hasta un 50% en el consumo de energía en comparación con los métodos de construcción tradicionales. Los propietarios pueden esperar facturas de servicios significativamente más bajas y una menor huella de carbono."
+      description: "Las viviendas hechas con paneles SIP destacan por su alta eficiencia energética, lo que disminuye considerablemente los gastos de calefacción y refrigeración.",
+      details: "La construcción con SIP elimina los puentes térmicos y crea una envolvente hermética. Los paneles SIP 70 tienen un equivalente térmico a 1.20 m de hormigón armado. Esto resulta en una reducción de hasta un 50% en el consumo de energía en comparación con los métodos de construcción tradicionales. Los propietarios pueden esperar facturas de servicios significativamente más bajas."
     },
     {
       title: "Ecológico",
       icon: <Leaf className="h-6 w-6 text-[#FDC107]" />,
       description: "Los materiales sostenibles y la reducción de residuos hacen que las casas SIP sean amigables con el medio ambiente.",
-      details: "Los SIP están hechos de recursos renovables y generan un mínimo de residuos de construcción. La eficiencia energética de las casas SIP también implica menores emisiones de gases de efecto invernadero a lo largo de la vida del edificio. Además, la precisión en la fabricación de los SIP reduce los residuos en el sitio de construcción, minimizando aún más el impacto ambiental."
+      details: "La mayor parte de un panel SIP está compuesta por madera, un recurso renovable que actúa como reserva de carbono, mientras que solo una pequeña porción es de plástico ya que el 98% del EPS es aire. Para una casa de 100 m², solo se requieren alrededor de 140 kg de plástico. La eficiencia energética que se obtiene con estos paneles resulta en menores emisiones de gases de efecto invernadero a lo largo de la vida útil del edificio, lo que compensa rápidamente su reducida huella de carbono y permite un ahorro continuo durante muchas décadas. Además, la precisión en la fabricación de los SIP disminuye los residuos en el sitio de construcción, lo que minimiza aún más el impacto ambiental."
     },
     {
       title: "Construcción Rápida",
       icon: <Clock className="h-6 w-6 text-[#FDC107]" />,
       description: "La construcción con SIP es más rápida que los métodos tradicionales, ahorrando tiempo y costos laborales.",
-      details: "Los paneles SIP se prefabrican fuera del sitio, lo que permite un ensamblaje rápido una vez en el lugar. Esto puede reducir el tiempo de construcción hasta un 50% en comparación con los métodos tradicionales de construcción con estructura de madera. Una construcción más rápida significa menores costos laborales, ocupación anticipada y una menor exposición a retrasos y daños relacionados con el clima."
+      details: "Los paneles SIP se prefabrican fuera del sitio, lo que permite un ensamblaje rápido una vez en el lugar. Ademas resuelven tanto estructura como aislacion térmica en un solo paso. Esto puede reducir el tiempo de construcción hasta un 50% en comparación con los métodos tradicionales. Una construcción más rápida significa menores costos laborales, ocupación anticipada y una menor exposición a retrasos y daños relacionados con el clima."
     },
     {
       title: "Rentable",
       icon: <PiggyBank className="h-6 w-6 text-[#FDC107]" />,
-      description: "Aunque los costos iniciales pueden ser ligeramente más altos, las casas SIP ofrecen ahorros a largo plazo.",
-      details: "La inversión inicial en la construcción con SIP se compensa con la reducción de costos laborales, tiempos de construcción más rápidos y significativos ahorros energéticos a largo plazo. A lo largo de la vida del edificio, las casas SIP resultan ser más rentables que los métodos de construcción tradicionales. Además, la durabilidad de los SIP significa menores costos de mantenimiento a lo largo del tiempo."
+      description: "Las casas construidas con paneles SIP tienen costos competitivos y ofrecen grandes ahorros a largo plazo. ",
+      details: "Los paneles SIP ofrecen una solución de construcción que no solo iguala o reduce los costos de las técnicas tradicionales, sino que también permite un ahorro a lo largo de la vida útil de la vivienda."
     },
     {
       title: "Duradero",
       icon: <Shield className="h-6 w-6 text-[#FDC107]" />,
-      description: "Las estructuras SIP son fuertes y resistentes a varios factores ambientales.",
-      details: "La construcción con SIP crea una estructura sólida y unificada que es altamente resistente al viento, terremotos y otras tensiones ambientales. El aislamiento continuo y el menor número de juntas en las estructuras SIP también las hacen menos susceptibles al daño por humedad y al crecimiento de moho. Esta durabilidad se traduce en una mayor vida útil del edificio y menores costos de mantenimiento."
+      description: "Las estructuras SIP son fuertes y destacan en la resistencia a los factores ambientales.",
+      details: "La construcción con SIP crea una estructura sólida y unificada que es altamente resistente al viento, terremotos y otras tensiones ambientales. Ademas la utilización de materiales complementarios de avanzada tecnología y detalladas técnicas de construcción garantizan una gran durabilidad. El sistema utiliza cámara de aire externa a los paneles perimetrales, lo cual garantiza la correcta respiración de la madera evitando problemas de humedad."
     },
     {
       title: "Versátil",
@@ -53,7 +53,7 @@ export default function Benefits() {
           </h2>
           <div className="w-24 h-1 bg-[#FDC107] mx-auto mb-8"></div>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Descubre por qué los Paneles Aislados Estructurales están revolucionando la industria de la construcción.
+            Descubrí por qué los SIP (Structural Insulated Panel) son el futuro y también el presente de la construcción.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -78,12 +78,6 @@ export default function Benefits() {
               </CardContent>
             </Card>
           ))}
-        </div>
-        <div className="text-center">
-          <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90 inline-flex items-center">
-            Conoce más sobre SIP
-            <ChevronRight className="ml-2 h-4 w-4" />
-          </Button>
         </div>
       </div>
     </section>
