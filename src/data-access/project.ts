@@ -11,3 +11,12 @@ export async function createProject(project: any) {
 
   return createdProject;
 }
+
+export async function getAllProjectsWithImages() {
+  const projects = await prisma.project.findMany({
+    include: {
+      images: true, 
+    },
+  });
+    return projects;
+}

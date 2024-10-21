@@ -1,7 +1,7 @@
 "use server"
 
 import {S3Client, PutObjectCommand} from "@aws-sdk/client-s3"
-import { createProject } from "@/data-access/project"
+import { createProject, getAllProjectsWithImages } from "@/data-access/project"
 import { createImage } from "@/data-access/image"
 import { generateFileName } from "@/lib/utils"
 import { getSignedUrl} from "@aws-sdk/s3-request-presigner"
@@ -83,4 +83,15 @@ export async function getSignedURL (fileType: string, fileSize:number, projectId
   })
 
   return { success: { url } }
+}
+
+
+export async function getProjects () {
+  try {
+    const projects = await getAllProjectsWithImages()
+    return projects
+  
+  } catch (error) {
+    return {success: false, error: "Error al crear el proyecto"};
+  }
 }

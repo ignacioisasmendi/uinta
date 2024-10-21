@@ -1,12 +1,17 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight, ArrowRight } from "lucide-react"
+import { getProjects } from "@/actions/project"
 import Image from "next/image"
 import Link from "next/link"
 import imagePrincipal from "../../public/entre-sierras/principal.png"
 
 
-export default function Portfolio() {
+export default async function Portfolio() {
+  
+  const projects = await getProjects();
+  console.log(projects[0].images);
+  
 
   const portfolioItems = [
     { id: 1, title: "Entre Sierras", image: imagePrincipal },
@@ -16,6 +21,7 @@ export default function Portfolio() {
     { id: 5, title: "Entre Sierras", image: imagePrincipal },
     { id: 6, title: "Entre Sierras", image: imagePrincipal },    
   ]
+
 
   return (
     <section className="w-full px-4 md:px-16 py-12 md:py-24 lg:py-32 bg-black/95">
@@ -27,19 +33,20 @@ export default function Portfolio() {
         </div>
         <div className="w-24 h-1 bg-[#FDC107] mx-auto mb-12"></div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {portfolioItems.map((item) => (
+          {projects.map((item) => (
             <Card key={item.id} className="bg-[#272c2d] border-none overflow-hidden group">
               <CardContent className="p-0">
                 <div className="relative aspect-video overflow-hidden">
                   <Image
-                    src={item.image}
-                    alt={item.title}
-                    
+                    src={item.images[0].url}
+                    alt={item.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">{item.name}</h3>
                   {/*<p className="text-gray-400 mb-4">{item.description}</p>*/}                  
                   <Link href={`/project/${item.id}`} passHref>
                     <Button variant="link" className="text-[#FDC107] hover:text-[#FDC107]/80 p-0 group">
