@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Lock, Mail } from "lucide-react"
 import Link from "next/link"
 import Image from 'next/image'
-import SignUpForm from '@/components/landing/signup-form'
+import SignUpForm from '@/components/app/signup-form'
 import signup from '@/public/entre-sierras/7.jpg'
 import logo from '@/public/uinta-logo.svg'
 

@@ -4,7 +4,7 @@ import Footer from "@/components/landing/footer"
 import Header from "@/components/landing/header"
 import Portfolio from "@/components/landing/portfolio"
 import Benefits from "@/components/landing/benefits"
-import Servicios from "@/components/landing/servicios"
+import Services from "@/components/landing/services"
 import Hero from "@/components/landing/hero"
 
 
@@ -16,7 +16,7 @@ export default function LandingPage() {
 
       <main className="flex-1">
         <Hero/>
-        <Servicios/>
+        <Services/>
         <Portfolio/>
         <Benefits/>
         <section className="w-full py-12 md:py-24 lg:py-32 bg-black/95">

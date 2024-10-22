@@ -5,13 +5,13 @@ import Image from "next/image"
 import backgroundImage from "../../public/hero-image1.jpg"
 import { ChevronDown } from "lucide-react"
 
-export default function LandingPage() {
+export default function Hero() {
 
   const [isVisible, setIsVisible] = useState(true)
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.pageYOffset > 500) {
+      if (window.scrollY > 0) {
         setIsVisible(false)
       } else {
         setIsVisible(true)

@@ -4,7 +4,7 @@ import Header from "@/components/app/header"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex-col h-screen bg-gray-100">
+    <div className="flex-col h-screen bg-white">
       <Header/>
       <div className="flex">
         <Sidebar/>

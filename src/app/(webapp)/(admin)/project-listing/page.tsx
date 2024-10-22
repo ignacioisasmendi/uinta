@@ -1,13 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card"
+import { getProjects } from "@/actions/project"
 import Image from "next/image"
 
 
 export default async function ProjectListingPage() {
-  const projects = [
-    {id:1, name: 'Proyecto 1', duration: 12, people: 10, area: 1000, mainImage: '/placeholder.svg'}, 
-    {id:2, name: 'Proyecto 2', duration: 24, people: 20, area: 2000, mainImage: '/placeholder.svg'}, 
-    {id:3, name: 'Proyecto 3', duration: 36, people: 30, area: 3000, mainImage: '/placeholder.svg'}
-  ]
+
+  const projects = await getProjects();
+
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
@@ -19,7 +18,7 @@ export default async function ProjectListingPage() {
               <CardContent className="p-4 flex">
                 <div className="w-1/3 mr-4">
                   <Image
-                    src={project.mainImage || "/placeholder.svg"}
+                    src={project.images[0].url}
                     alt={project.name}
                     width={100}
                     height={100}
@@ -30,7 +29,7 @@ export default async function ProjectListingPage() {
                   <h2 className="text-lg font-semibold mb-2">{project.name}</h2>
                   <div className="text-sm text-gray-600 space-y-1">
                     <p>Duración: {project.duration} meses</p>
-                    <p>Personas: {project.people}</p>
+                    <p>Ubicacion: {project.location}</p>
                     <p>Área: {project.area} m²</p>
                   </div>
                 </div>

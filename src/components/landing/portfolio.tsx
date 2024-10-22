@@ -10,7 +10,7 @@ import imagePrincipal from "../../public/entre-sierras/principal.png"
 export default async function Portfolio() {
   
   const projects = await getProjects();
-  console.log(projects[0].images);
+  //console.log(projects[0].images);
   
 
   const portfolioItems = [
@@ -48,7 +48,7 @@ export default async function Portfolio() {
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-white mb-2">{item.name}</h3>
                   {/*<p className="text-gray-400 mb-4">{item.description}</p>*/}                  
-                  <Link href={`/project/${item.id}`} passHref>
+                  <Link href={`/project/${item.slug}`} passHref>
                     <Button variant="link" className="text-[#FDC107] hover:text-[#FDC107]/80 p-0 group">
                       Ver Obra
                       <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />

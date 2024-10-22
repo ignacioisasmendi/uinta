@@ -20,3 +20,15 @@ export async function getAllProjectsWithImages() {
   });
     return projects;
 }
+
+export async function getProjectBySlug(slug:string){
+  const project = await prisma.project.findUnique({
+    where:{
+      slug: slug
+    }, 
+    include: {
+      images: true, 
+    },
+  })
+  return project
+}

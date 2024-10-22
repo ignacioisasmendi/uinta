@@ -1,7 +1,7 @@
 "use server"
 
 import {S3Client, PutObjectCommand} from "@aws-sdk/client-s3"
-import { createProject, getAllProjectsWithImages } from "@/data-access/project"
+import { createProject, getAllProjectsWithImages, getProjectBySlug } from "@/data-access/project"
 import { createImage } from "@/data-access/image"
 import { generateFileName } from "@/lib/utils"
 import { getSignedUrl} from "@aws-sdk/s3-request-presigner"
@@ -86,12 +86,28 @@ export async function getSignedURL (fileType: string, fileSize:number, projectId
 }
 
 
-export async function getProjects () {
-  try {
-    const projects = await getAllProjectsWithImages()
-    return projects
-  
-  } catch (error) {
-    return {success: false, error: "Error al crear el proyecto"};
+export async function getProjects() {
+  return new Promise(async (resolve) => {
+    setTimeout(async () => {
+      const projects = await getAllProjectsWithImages();
+      resolve(projects);
+    }, 4000); // Simulate a 2-second delay
+  });
+}
+
+
+export async function getProject(slug:string) {
+  const project = await getProjectBySlug(slug)
+
+  if (!project) {
+    return null
   }
+
+  const imageUrls = project.images.map(image => image.url)
+
+  return {
+    ...project,
+    images: imageUrls
+  }
+
 }

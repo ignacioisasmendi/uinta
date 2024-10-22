@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import LoginForm from '@/components/landing/login-form'
+import LoginForm from '@/components/app/login-form'
 import signup from '@/public/entre-sierras/7.jpg'
 import logo from '@/public/uinta-logo.svg'
 
