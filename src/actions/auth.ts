@@ -1,9 +1,9 @@
 "use server"
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 import { getUserByEmail, createUser} from '@/data-access/user'
 import { SignupFormSchema, LoginFormSchema } from '@/lib/zod/definitions'
-
+import { createSession, deleteSession} from '@/lib/session'
+import { redirect } from "next/navigation";
 
 export async function signup(state:any, formData: FormData){
 
@@ -71,15 +71,13 @@ export async function login(state: any, formData: FormData) {
       errors: "Contraseña incorrecta",
     }
   }
+ 
+  await createSession(user.email); 
 
-  const jwtSecret: string | undefined = process.env.JWT_SECRET
-  if (!jwtSecret) {
-    return {
-      successful: false
-    }
-  }
-
-  const accessToken: string = jwt.sign({ email: user.email }, jwtSecret , { expiresIn: '1h' })  
-  
-  return { successful: true, token: accessToken }
+  redirect("/project-listing")
 } 
+
+export async function logout() {
+  await deleteSession();
+  redirect("/login");
+}

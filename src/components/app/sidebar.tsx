@@ -1,7 +1,8 @@
 "use client"
 import { ClipboardList, FileText, Home, LogOut, Menu, Plus, Settings, Users, X } from "lucide-react"
-import Link from "next/link"
 import { useState } from "react"
+import {logout} from "@/actions/auth"
+import Link from "next/link"
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -30,7 +31,10 @@ export default function Sidebar() {
             <NavItem href="/reports" icon={FileText} />
             <NavItem href="/settings" icon={Settings} />
           </nav>
-          <button className="mt-auto p-3 rounded-lg hover:bg-red-100 text-red-600 transition-colors">
+          <button 
+            className="mt-auto p-3 rounded-lg hover:bg-red-100 text-red-600 transition-colors"
+            onClick={() => {logout()}}
+          >
             <LogOut className="h-6 w-6" />
           </button>
         </div>
