@@ -3,23 +3,13 @@ import { login } from '@/actions/auth'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Lock, Mail } from "lucide-react"
-import { useRouter } from 'next/navigation'
 import { useFormState } from "react-dom"
 import { toast } from "react-hot-toast"
 import SubmitButton from '@/components/app/submit-button'
 
 
-
-
 export default function LoginForm() {
   const [state, action] = useFormState(login, null)
-  const router = useRouter()
-
-
-  if(state?.token) {
-    localStorage.setItem('token', state.token)
-    router.push('/project-listing')
-  }
 
   if (state?.errors) {
     toast.error(state.errors)  
