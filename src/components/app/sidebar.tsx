@@ -23,12 +23,12 @@ export default function Sidebar() {
       >
         <div className="w-64 lg:w-48 bg-white shadow-md flex flex-col items-center py-6 h-full">
           <nav className="flex-1 space-y-8">
-            <NavItem href="/home" icon={Home} />            
-            <NavItem href="/project-listing" icon={ClipboardList} />
-            <NavItem href="/new-project" icon={Plus} />
-            <NavItem href="/team" icon={Users} />
+            <NavItem href="/home" name="Home" icon={Home} />            
+            <NavItem href="/project-listing" name="Obras" icon={ClipboardList} />
+            <NavItem href="/new-project" name="Nueva obra" icon={Plus} />
+           {/*  <NavItem href="/team" icon={Users} />
             <NavItem href="/reports" icon={FileText} />
-            <NavItem href="/settings" icon={Settings} />
+            <NavItem href="/settings" icon={Settings} /> */}
           </nav>
           <button className="mt-auto p-3 rounded-lg hover:bg-red-100 text-red-600 transition-colors">
             <LogOut className="h-6 w-6" />
@@ -39,7 +39,7 @@ export default function Sidebar() {
   )
 }
 
-function NavItem({ href, icon: Icon }: { href: string; icon: React.ComponentType }) {
+function NavItem({ href, name ,icon: Icon }: { href: string; name:string ;icon: React.ComponentType }) {
   return (
     <Link
       href={href}
@@ -47,7 +47,7 @@ function NavItem({ href, icon: Icon }: { href: string; icon: React.ComponentType
     >
       <Icon/>
       <span className="ml-3">
-        {href.charAt(1).toUpperCase() + href.slice(2)}
+        {name}
       </span>
     </Link>
   )

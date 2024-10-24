@@ -87,12 +87,8 @@ export async function getSignedURL (fileType: string, fileSize:number, projectId
 
 
 export async function getProjects() {
-  return new Promise(async (resolve) => {
-    setTimeout(async () => {
-      const projects = await getAllProjectsWithImages();
-      resolve(projects);
-    }, 4000); // Simulate a 2-second delay
-  });
+  const projects = await getAllProjectsWithImages();
+  return projects
 }
 
 
