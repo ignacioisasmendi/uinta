@@ -14,16 +14,17 @@ model User {
   lastName  String
   email     String   @unique
   password  String
-  roleId    Int      @default(2)
+  role UserRole @default(CLIENT)
   createdAt DateTime @default(now())
-  role      Role     @relation(fields: [roleId], references: [id])
 }
 
-model Role {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  users User[]
+
+enum UserRole {
+  ADMIN
+  CONSTRUCTOR
+  CLIENT
 }
+
 
 model Project {
   id          Int     @id @default(autoincrement())
@@ -33,7 +34,6 @@ model Project {
   location    String
   area        Int
   description String
-
   images      Image[]
 }
 

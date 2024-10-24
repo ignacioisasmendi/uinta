@@ -17,14 +17,14 @@ export default function Header() {
         />
       </div>
       <div className="flex items-center space-x-4 w-full sm:w-auto">
-        <div className="relative w-full sm:w-64">
+       {/*  <div className="relative w-full sm:w-64">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <Input className="pl-10" placeholder="Search projects..." />
         </div>
         <Button className="whitespace-nowrap">
           <Plus className="mr-2 h-4 w-4" />
           New Project
-        </Button>
+        </Button> */}
         <button className="p-2 rounded-full bg-gray-200">
           <User className="h-5 w-5 text-gray-600" />
         </button>

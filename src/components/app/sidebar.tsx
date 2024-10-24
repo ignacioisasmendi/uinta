@@ -30,13 +30,17 @@ export default function Sidebar() {
            {/*  <NavItem href="/team" icon={Users} />
             <NavItem href="/reports" icon={FileText} />
             <NavItem href="/settings" icon={Settings} /> */}
-          </nav>
-          <button 
-            className="mt-auto p-3 rounded-lg hover:bg-red-100 text-red-600 transition-colors"
-            onClick={() => {logout()}}
-          >
-            <LogOut className="h-6 w-6" />
+            <button 
+              className="p-3 rounded-lg hover:bg-gray-100 text-red-600 transition-colors flex items-center w-full"
+              onClick={() => {logout()}}
+            >
+              <LogOut className="h-6 w-6 " />
+              <span className="ml-3">
+                Salir  
+              </span>
           </button>
+          </nav>
+          
         </div>
       </div>
     </div>
