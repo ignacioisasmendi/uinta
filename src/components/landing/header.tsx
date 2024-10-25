@@ -59,7 +59,9 @@ export default function Header({ colorDefault, colorScroll }: Props) {
             <Link className={`text-xl font-medium hover:underline-[#FDC107]`} href="#">
               Contacto
             </Link>
-            <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90" variant="secondary">Solicitar cotizacion</Button>
+            <Button className="bg-[#FDC107] text-black hover:bg-[#FDC107]/90" variant="secondary">
+              <Link href="/budget">Solicitar cotizacion</Link>
+            </Button>
           </nav>
           <div className="md:hidden">
             <Button variant="ghost" size="icon" onClick={toggleMenu} aria-label="Toggle menu">

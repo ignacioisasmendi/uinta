@@ -1,11 +1,18 @@
-import { Hammer, Brush, ChevronUp, TableCellsSplit } from "lucide-react"
-import { ReactNode } from "react"
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+import { TableCellsSplit } from 'lucide-react'
+
+// Assuming you have these imports
+import kitIcon from "@/public/icons/kit-icon.png"
+import roofIcon from "@/public/icons/roof-icon.png"
 
 interface ServiceItemProps {
-  icon: ReactNode;
-  title: string;
-  description: string;
-  flecha: boolean;
+  icon: React.ReactNode
+  title: string
+  description: string
+  flecha: boolean
+  delay: number
 }
 
 export default function ServicesSection() {
@@ -21,26 +28,25 @@ export default function ServicesSection() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <ServiceItem
-            icon={<Hammer className="w-12 h-12 text-yellow-400" />}
+            icon={<img src={kitIcon.src} alt="kit-icon" className="w-16 h-16" />}
             title="Montaje de kit"
-            description="Ofrecemos servicios profesionales de montaje de kits, asegurando una instalación precisa y eficiente para sus proyectos."
+            description="Ofrecemos servicio de montaje de paneles SIP de manera rápida y precisa."
             flecha={false}
+            delay={0}
           />
           <ServiceItem
-            icon={<TableCellsSplit className="w-12 h-12 text-yellow-400" />}
+            icon={<TableCellsSplit className="w-16 h-16 text-[#fdc215]" />}
             title="Revestimiento"
-            description="Nuestro equipo especializado proporciona servicios de revestimiento de alta calidad para mejorar y proteger sus estructuras."
+            description="Colocamos diversos revestimientos como chapa o siding sobre construcción de paneles."
             flecha={false}
+            delay={100}
           />
          <ServiceItem
-            icon={
-              <div className="w-16 h-16 flex items-end justify-center">
-                <ChevronUp className="w-16 h-16 text-yellow-400" />
-              </div>
-            }
+            icon={<img src={roofIcon.src} alt="roof-icon" className="w-16 h-16" />}
             title="Techado"
-            description="Brindamos soluciones de techado duraderas y estéticas, adaptadas a las necesidades específicas de cada proyecto."
+            description="Brindamos soluciones de techado duraderas para cada proyecto."
             flecha={true}
+            delay={200}
           />
         </div>
       </div>
@@ -48,10 +54,45 @@ export default function ServicesSection() {
   )
 }
 
-function ServiceItem({ icon, title, description, flecha }: ServiceItemProps) {
+function ServiceItem({ icon, title, description, flecha, delay }: ServiceItemProps) {
+  const [isVisible, setIsVisible] = useState(false)
+  const itemRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setIsVisible(true)
+          }, delay)
+          observer.unobserve(entry.target)
+        }
+      },
+      {
+        threshold: 0.1,
+      }
+    )
+
+    if (itemRef.current) {
+      observer.observe(itemRef.current)
+    }
+
+    return () => {
+      if (itemRef.current) {
+        observer.unobserve(itemRef.current)
+      }
+    }
+  }, [delay])
+
   return (
-    <div className="flex flex-col items-center text-center">
-      <div className={`${flecha ? 'mb-0' : 'mb-4'}`}>{icon}</div>
+    <div 
+      ref={itemRef}
+      className={`flex flex-col items-center text-center transition-all duration-1000 ease-out ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1/2'
+      }`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <div className={`${flecha ? 'mb-4' : 'mb-4'}`}>{icon}</div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
       <p className="text-gray-300">{description}</p>
     </div>
