@@ -8,10 +8,6 @@
   --backgroundurl: url('../public/FullSizeRender.jpg');
 }
 
-body {
-  color: black;
-  background: white;
-}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

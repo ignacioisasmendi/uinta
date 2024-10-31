@@ -28,7 +28,7 @@ export default async function ProjectListingPage() {
                 <div className="text-sm text-gray-600 space-y-1">
                   <p>Duración: {project.duration} meses</p>
                   <p>Ubicacion: {project.location}</p>
-                  <p>Área: {project.area} m²</p>
+                  <p>Area: {project.area} m²</p>
                 </div>
               </div>
             </CardContent>

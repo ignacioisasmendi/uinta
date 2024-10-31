@@ -1,13 +1,20 @@
 import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { redirect } from 'next/navigation';
+
+type SessionPayload = {
+  userId: string;
+  userRole: string;
+  expiresAt: Date;
+};
 
 const secretKey = process.env.JWT_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
 
-export async function createSession(userId: string) {
+export async function createSession(userId: string, userRole: string) {
   const expiresAt = new Date(Date.now() + 2 * 60 * 60 * 1000); // 2 hours
-  const session = await encrypt({ userId, expiresAt });
+  const session = await encrypt({ userId, userRole, expiresAt });
 
   cookies().set("session", session, {
     httpOnly: true,
@@ -19,11 +26,6 @@ export async function createSession(userId: string) {
 export async function deleteSession() {
   cookies().delete("session");
 }
-
-type SessionPayload = {
-  userId: string;
-  expiresAt: Date;
-};
 
 export async function encrypt(payload: SessionPayload) {
   return new SignJWT(payload)
@@ -42,4 +44,15 @@ export async function decrypt(session: string | undefined = "") {
   } catch (error) {
     console.log("Failed to verify session");
   }
+}
+
+export async function verifySession() {
+  const cookie = cookies().get('session')?.value;
+  const session = await decrypt(cookie);
+
+  if (!session?.userId) {
+    redirect('/login');
+  }
+
+  return { isAuth: true, userId: Number(session.userId), isAdmin: session.userRole === 'admin' };
 }

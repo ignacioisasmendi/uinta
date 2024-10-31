@@ -7,18 +7,11 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Calendar as CalendarComponent } from "@/components/ui/calendar"
-import { format } from "date-fns"
-import { es } from "date-fns/locale"
 import Header from "@/components/landing/header"
 
 export default function BudgetRequestForm() {
   const [files, setFiles] = useState<FileList | null>(null)
-  const [startDate, setStartDate] = useState<Date>()
-  const [endDate, setEndDate] = useState<Date>()
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -28,8 +21,6 @@ export default function BudgetRequestForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted", { startDate, endDate })
   }
 
   return (
@@ -77,26 +68,6 @@ export default function BudgetRequestForm() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label className="text-white">Método de Contacto Preferido</Label>
-                    <RadioGroup defaultValue="email">
-                      <div className="flex space-x-4">
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="email" id="email-contact" />
-                          <Label htmlFor="email-contact" className="text-white">Email</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="phone" id="phone-contact" />
-                          <Label htmlFor="phone-contact" className="text-white">Teléfono</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="text" id="text-contact" />
-                          <Label htmlFor="text-contact" className="text-white">Mensaje de texto</Label>
-                        </div>
-                      </div>
-                    </RadioGroup>
-                  </div>
-
-                  <div className="space-y-2">
                     <Label htmlFor="description" className="text-white">Descripción del Proyecto</Label>
                     <Textarea
                       id="description"
@@ -114,7 +85,7 @@ export default function BudgetRequestForm() {
                         type="file"
                         onChange={handleFileChange}
                         multiple
-                        className="bg-[#1c1f20] text-white border-gray-700 file:bg-[#FDC107] file:text-black file:border-0 file:px-4 file:py-2 file:rounded-md file:hover:bg-[#FDC107]/90 file:cursor-pointer"
+                        className="bg-[#1c1f20] text-white border-gray-700 file:bg-[#FDC107] file:text-black file:border-0 file:px-2  file:rounded-md file:hover:bg-[#FDC107]/90 file:cursor-pointer"
                       />
                     </div>
                     {files && (

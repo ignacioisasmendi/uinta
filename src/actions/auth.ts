@@ -4,6 +4,9 @@ import { getUserByEmail, createUser} from '@/data-access/user'
 import { SignupFormSchema, LoginFormSchema } from '@/lib/zod/definitions'
 import { createSession, deleteSession} from '@/lib/session'
 import { redirect } from "next/navigation";
+import { sendEmail } from './email'
+import Welcome from '@/emails/welcome';
+import * as React from 'react';
 
 export async function signup(state:any, formData: FormData){
 
@@ -34,6 +37,9 @@ export async function signup(state:any, formData: FormData){
 
   user.password = await bcrypt.hash(user.password, 10)
   await createUser(user)
+  const resultEmail = await sendEmail({toProp: user.email, subjectProp: "Bienvenido a Uinta Construcciones", emailProp: Welcome({userFirstname: user.firstName})})
+  console.log(resultEmail);
+  
 
   return {successful: true, errors: ""}
 }
@@ -72,7 +78,7 @@ export async function login(state: any, formData: FormData) {
     }
   }
  
-  await createSession(user.email); 
+  await createSession(resultUser.email, resultUser.role); 
 
   redirect("/project-listing")
 } 
