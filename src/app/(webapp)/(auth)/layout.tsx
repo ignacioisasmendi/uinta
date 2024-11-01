@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import signup from '@/public/entre-sierras/7.jpg'
-import logo from '@/public/uinta-logo.svg'
+import logo from '@/public/uinta-logo.png'
 import styles from './styles.module.css'
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
