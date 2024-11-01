@@ -43,16 +43,16 @@ export default async function ProjectDetail({ params: { slug } }: { params: { sl
 
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-black/90 border-none">
                 <CardContent className="flex items-center p-4">
                   <Calendar className="h-5 w-5 mr-2 text-[#FDC107]" />
                   <div>
                     <p className="text-sm text-gray-400">Duracion</p>
-                    <p className="font-semibold">{project?.duration}</p>
+                    <p className="font-semibold">{project?.duration} meses</p>
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-black/90 border-none">
                 <CardContent className="flex items-center p-4">
                   <Ruler className="h-5 w-5 mr-2 text-[#FDC107]" />
                   <div>
@@ -61,7 +61,7 @@ export default async function ProjectDetail({ params: { slug } }: { params: { sl
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-black/90 border-none">
                 <CardContent className="flex items-center p-4">
                   <BrickWall className="h-5 w-5 mr-2 text-[#FDC107]" />
                   <div>
@@ -70,7 +70,7 @@ export default async function ProjectDetail({ params: { slug } }: { params: { sl
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-black/90 border-none">
                 <CardContent className="flex items-center p-4">
                   <MapPin className="h-5 w-5 mr-2 text-[#FDC107]" />
                   <div>
@@ -85,12 +85,12 @@ export default async function ProjectDetail({ params: { slug } }: { params: { sl
         </div>
 
         <Tabs defaultValue="features" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="bg-black/90 border-none grid w-full grid-cols-2">
             <TabsTrigger value="features">Features</TabsTrigger>
             <TabsTrigger value="timeline">Project Timeline</TabsTrigger>
           </TabsList>
           <TabsContent value="features" className="mt-4">
-            <Card className="bg-gray-800 border-gray-700">
+            <Card className="bg-black/90 border-none">
               <CardContent className="p-6">
                 <ul className="list-disc pl-5 space-y-2 text-gray-300">
                   <li>Open-concept living area with floor-to-ceiling windows</li>

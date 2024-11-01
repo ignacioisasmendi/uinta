@@ -21,6 +21,8 @@ export async function createSession(userId: string, userRole: string) {
     secure: true,
     expires: expiresAt,
   });
+
+  return session;
 }
 
 export async function deleteSession() {

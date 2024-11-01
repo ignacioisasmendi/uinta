@@ -5,8 +5,9 @@ import { SignupFormSchema, LoginFormSchema } from '@/lib/zod/definitions'
 import { createSession, deleteSession} from '@/lib/session'
 import { redirect } from "next/navigation";
 import { sendEmail } from './email'
-import Welcome from '@/emails/welcome';
-import * as React from 'react';
+import WelcomeEmail from '@/emails/welcome';
+import ForgotPasswordEmail from '@/emails/forgotPassword'
+
 
 export async function signup(state:any, formData: FormData){
 
@@ -37,7 +38,7 @@ export async function signup(state:any, formData: FormData){
 
   user.password = await bcrypt.hash(user.password, 10)
   await createUser(user)
-  const resultEmail = await sendEmail({toProp: user.email, subjectProp: "Bienvenido a Uinta Construcciones", emailProp: Welcome({userFirstname: user.firstName})})
+  const resultEmail = await sendEmail({toProp: user.email, subjectProp: "Bienvenido a Uinta Construcciones", emailProp: WelcomeEmail({userFirstname: user.firstName})})
   console.log(resultEmail);
   
 
@@ -86,4 +87,23 @@ export async function login(state: any, formData: FormData) {
 export async function logout() {
   await deleteSession();
   redirect("/login");
+}
+
+export async function forgotPassword(state: any, formData: FormData) {
+  const email = formData.get('email') as string
+
+  const user = await getUserByEmail(email)
+
+  if (!user) {
+    return {
+      successful: false,
+      errors: "Correo electronico no registrado",
+    }
+  }
+
+  const token = await createSession(user.email, user.role)
+
+  await sendEmail({toProp: user.email, subjectProp: "Restablecer contraseña - Uinta Construcciones", emailProp: ForgotPasswordEmail({userFirstname: user.firstName, token: token})})
+
+  return {successful: true, errors: ""}
 }

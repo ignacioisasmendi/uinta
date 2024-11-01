@@ -3,107 +3,119 @@ import {
   Button,
   Container,
   Head,
+  Hr,
   Html,
   Img,
+  Link,
   Preview,
   Section,
   Text,
 } from "@react-email/components";
+import { AlignCenter } from "lucide-react";
 import * as React from "react";
 
 interface WelcomeEmailProps {
   userFirstname: string;
 }
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "";
+const baseUrl = `https://uinta.vercel.app`
 
-export const WelcomeEmail = ({
-  userFirstname,
-}: WelcomeEmailProps) => (
-  <Html>
-    <Head />
-    <Preview>
-      Bienvenido a Uinta
-    </Preview>
-    <Body style={main}>
-      <Container style={container}>
-        <Img
-          src="https://uinta.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FLogo%20cd.2.5690f8ef.png&w=3840&q=75"
-          width="150"
-          height="150"
-          alt="Uinta"
-          style={logo}
-        />
-        <Text style={paragraph}>Hola {userFirstname},</Text>
-        <Text style={paragraph}>
-          Bienvenido a Uinta, lo invitamos a explorar nuestra página web www.uintaconstrucciones.com 
-          para conocer más sobre nuestros obras y los servicios que ofrecemos. 
-          Si tiene alguna pregunta o desea programar una consulta, no dude en contactarnos.
-        </Text>
-        <Section style={btnContainer}>
-          <Button style={button} href="https://uinta.vercel.app/login">
-            Empecemos
-          </Button>
-        </Section>
-        <Text style={paragraph}>
-          Saludos
-          <br />
-          Equipo de Uinta Construcciones
-        </Text>
-      </Container>
-    </Body>
-  </Html>
-);
+  export const WelcomeEmail = ({
+    userFirstname
+  }: WelcomeEmailProps) => (
+    <Html>
+      <Head />
+      <Preview>You're now ready to make live transactions with Stripe!</Preview>
+      <Body style={main}>
+        <Container style={container}>
+          <Section style={box}>
+            <Img
+              src={`${baseUrl}/_next/static/media/uinta-logo.5fe7f137.svg`}
+              width="180"
+              height="60"
+              alt="Uinta"
+              style={centeredImage}
+            />
+            <Hr style={hr} />
+            <Text style={paragraph}>
+              Hola {userFirstname},
+            </Text>
+            <Text style={paragraph}>
+              ¡Nos alegra que te hayas unido a Uinta Construcciones! Estamos encantados de tenerte con nosotros y esperamos que disfrutes de todos los beneficios y servicios que ofrecemos.
+            </Text>
+            <Button style={button} href={`${baseUrl}/login`}>
+              Iniciar sesión en tu cuenta
+            </Button>
+            <Hr style={hr} />
+            <Text style={footer}>Uinta Construcciones</Text>
+          </Section>
+        </Container>
+      </Body>
+    </Html>
+  );
+  
 
-WelcomeEmail.PreviewProps = {
-  userFirstname: "Alan",
-} as WelcomeEmailProps;
+  WelcomeEmail.PreviewProps = {
+    userFirstname: "Nacho",
+  } as WelcomeEmailProps;
 
-export default WelcomeEmail;
+  export default WelcomeEmail;
+  
+  const main = {
+    backgroundColor: "#f6f9fc",
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif',
+  };
+  
+  
+  const container = {
+    backgroundColor: "#ffffff",
+    margin: "0 auto",
+    padding: "20px 0 48px",
+    marginBottom: "64px",
+  };
+  
+  const box = {
+    padding: "0 48px",
+  };
 
-const main = {
-  backgroundColor: "#ffffff",
-  fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
-};
+  const centeredImage = {
+    display: "block",
+    margin: "0 auto",
+  };
+  
+  const hr = {
+    borderColor: "#e6ebf1",
+    margin: "20px 0",
+  };
+  
+  const paragraph = {
+    color: "#525f7f",
+  
+    fontSize: "16px",
+    lineHeight: "24px",
+    textAlign: "left" as const,
+  };
+  
 
-const container = {
-  margin: "0 auto",
-  padding: "20px 0 48px",
-};
 
-const logo = {
-  margin: "0 auto",
-};
-
-const paragraph = {
-  fontSize: "16px",
-  lineHeight: "26px",
-};
-
-const btnContainer = {
-  textAlign: "center" as const,
-};
-
-const button = {
-  backgroundColor: "#FDC107",
-  borderRadius: "3px",
-  color: "#000",
-  fontSize: "16px",
-  textDecoration: "none",
-  textAlign: "center" as const,
-  display: "block",
-  padding: "12px",
-};
-
-const hr = {
-  borderColor: "#cccccc",
-  margin: "20px 0",
-};
-
-const footer = {
-  color: "#8898aa",
-  fontSize: "12px",
-};
+  const anchor = {
+    color: "#556cd6",
+  };
+  
+  const button = {
+    backgroundColor: "#fdc215",
+    borderRadius: "5px",
+    color: "#000",
+    fontSize: "16px",
+    textDecoration: "none",
+    textAlign: "center" as const,
+    display: "block",
+    padding: "10px",
+  };
+  
+  const footer = {
+    color: "#8898aa",
+    fontSize: "12px",
+    lineHeight: "16px",
+  };

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { CheckCircle2, Lock, Mail, User } from "lucide-react"
 import { useRouter } from 'next/navigation'
 import { useFormState } from 'react-dom'
+import Link from 'next/link'
 import toast from 'react-hot-toast'
 
 
@@ -38,7 +39,7 @@ export default function SignUpPage() {
   return (
     <>
       <div className="text-center">
-        <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Registro de Administrador</h2>
+        <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Crea una cuenta</h2>
       </div>
       <form className="mt-8 space-y-6" action={action}>
         <div className="space-y-4">
@@ -118,6 +119,17 @@ export default function SignUpPage() {
           <SubmitButton defaultText='Registrar' pendingText='Registrando...'/>
         </div>
       </form>
+      <div className="mt-6 flex flex-col space-y-4 text-sm text-center">
+        <Link href="/forgot-password" className="underline">
+           
+        </Link>
+        <p>
+          ¿Ya tiene una cuenta?{" "}
+          <Link href="/login" className="underline">
+            Inicie sesión
+          </Link>
+        </p>
+      </div>
     </>
   )
 }

@@ -9,7 +9,6 @@ import SubmitButton from '@/components/app/submit-button'
 import {newProject, getSignedURL, newImage} from "@/actions/project"
 import { CreateProjectSchema } from "@/lib/zod/definitions"
 import { X } from "lucide-react"
-import { error } from "console"
 
 export default function NewProjectForm() {
   const [state, action] = useFormState(clientAction, {
@@ -122,6 +121,7 @@ export default function NewProjectForm() {
           name="name"
           required
           className="bg-gray-50 border-gray-300 text-gray-900 focus:border-[#FDC107] focus:ring-[#FDC107]"
+          defaultValue={"prueba"}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

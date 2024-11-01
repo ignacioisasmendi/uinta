@@ -87,11 +87,11 @@ export default function Footer() {
           <p className="text-sm text-gray-400">
             © {new Date().getFullYear()} Uinta Construcciones | Todos los derechos reservados.
           </p>
-          <div className="mt-4 space-x-4">
+          {/* <div className="mt-4 space-x-4">
             <Link href="#" className="text-sm text-gray-400 hover:text-[#FDC107]">Privacy Policy</Link>
             <Link href="#" className="text-sm text-gray-400 hover:text-[#FDC107]">Terms of Service</Link>
             <Link href="#" className="text-sm text-gray-400 hover:text-[#FDC107]">Sitemap</Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>
