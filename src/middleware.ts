@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { decrypt, verifySession} from '@/lib/session'
 
 const protectedRoutes = ["/project-listing", "/new-project"];
-const publicRoutes = ["/login"];
+const publicRoutes = ["/login", "/signup"];
 const landingRoutes = ["/", "/project"]
 
 export default async function middleware(req: NextRequest) {
@@ -12,7 +12,7 @@ export default async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(path);
   const isLandingRoutes = landingRoutes.includes(path);
 
-  if (isLandingRoutes){
+  if (isLandingRoutes || isPublicRoute){
     return NextResponse.next();
   }
 

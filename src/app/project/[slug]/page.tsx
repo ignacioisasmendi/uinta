@@ -13,7 +13,11 @@ import image5 from "../../../public/entre-sierras/5.jpg"
 import image6 from "../../../public/entre-sierras/6.jpg"
 import image7 from "../../../public/entre-sierras/4.jpg"
 
-export default async function ProjectDetail({ params: { slug } }: { params: { slug: string }}) {
+type ProjectDetailProps = {
+    slug: string
+}
+
+export default async function ProjectDetail({ slug }: ProjectDetailProps) {
   const images = [
     image6, image1, image2, image4, image5, image7
   ]

@@ -30,9 +30,9 @@ const baseUrl = `https://uinta.vercel.app`
         <Container style={container}>
           <Section style={box}>
             <Img
-              src={`${baseUrl}/_next/static/media/uinta-logo.5fe7f137.svg`}
+              src={`${baseUrl}/_next/static/media/uinta-logo.fc69a7ed.png`}
               width="180"
-              height="60"
+              height="80"
               alt="Uinta"
               style={centeredImage}
             />

@@ -1,21 +1,31 @@
 "use client"
 import { forgotPassword } from '@/actions/auth'
+import SubmitButton from '@/components/app/submit-button'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
 import { CheckCircle2, Mail } from "lucide-react"
 import { useFormState } from "react-dom"
-import { toast } from "react-hot-toast"
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import SubmitButton from '@/components/app/submit-button'
+import toast from 'react-hot-toast'
 
-export default function ForgotPasswordPage() {
+export default async function ForgotPasswordPage() {
   const [state, action] = useFormState(forgotPassword, null)
+  const router = useRouter()
 
-  if (state?.successful == true) {
+  if (state?.successful) {
     return (
       <div className="flex flex-col items-center justify-center space-y-4">
         <CheckCircle2 className="w-16 h-16 text-green-500" />
-        <p className="text-xl font-semibold text-green-500">Verifica tu mail y segui las instrucciones</p>
+        <p className="text-xl font-semibold">Verifica tu mail y segui las instrucciones</p>
+        <Button 
+          type="submit" 
+          className="w-full bg-[#FDC107] hover:bg-[#FDC107]/90 text-black"
+          onClick={() => router.push('/login')}
+        >
+          Ir al inicio de sesión
+        </Button>
       </div>
     )
   }
@@ -59,7 +69,7 @@ export default function ForgotPasswordPage() {
       </form>
 
       <div className="mt-6 flex flex-col space-y-4 text-sm text-center">
-        <Link href="/forgot-password" className="underline">
+        <Link href="/login" className="underline">
           Volver al inicio de sesión
         </Link>
       </div>

@@ -2,13 +2,16 @@
 import { login } from '@/actions/auth'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Lock, Mail } from "lucide-react"
+import { Lock, Mail, Eye, EyeOff} from "lucide-react"
 import { useFormState } from "react-dom"
 import { toast } from "react-hot-toast"
+import { Button } from "@/components/ui/button"
 import Link from 'next/link'
 import SubmitButton from '@/components/app/submit-button'
+import { useState } from 'react'
 
 export default function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false)
   const [state, action] = useFormState(login, null)
 
   if (state?.errors) {
@@ -54,11 +57,20 @@ export default function LoginPage() {
             <Input
               id="password"
               name="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               autoComplete="current-password"
               className="pl-10 focus:ring-[#FDC107] focus:border-[#FDC107]"
               placeholder="Contraseña"
             />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="absolute inset-y-0 right-0 px-3"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </Button>
           </div>
         </div>
       </div>

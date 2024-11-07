@@ -9,17 +9,16 @@ export const SignupFormSchema = z.object({
     .string()
     .min(2, { message: 'El apellido debe tener al menos 2 caracteres.' })
     .trim(),
-  email: z.string().email({ message: 'Por favor, introduce un correo electrónico válido.' }).trim(),
+  email: z.string().email({ message: 'Introduce un correo electrónico válido.' }).trim(),
   password: z
     .string()
-    .min(8, { message: 'Debe tener al menos 8 caracteres.' })
-    .regex(/[a-zA-Z]/, { message: 'Debe contener al menos una letra.' })
-    .regex(/[0-9]/, { message: 'Debe contener al menos un número.' })
-    .regex(/[^a-zA-Z0-9]/, {
-      message: 'Debe contener al menos un carácter especial.',
-    })
+    .min(8, { message: 'La contrasena debe tener al menos 8 caracteres.' })
+    .regex(/[a-zA-Z]/, { message: 'La contrasena debe contener al menos una letra.' })
+    .regex(/[0-9]/, { message: 'La contrasena debe contener al menos un número.' })
+    .regex(/[^a-zA-Z0-9]/, { message: 'La contrasena debe contener al menos un carácter especial.' })
     .trim(),
-})
+});
+
 
 export const LoginFormSchema = z.object({
   email: z.string().email({ message: 'Por favor, introduce un correo electrónico válido.' }).trim(),

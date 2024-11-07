@@ -23,7 +23,7 @@ export async function signup(state:any, formData: FormData){
   if(!result.success){
     let errorMessage = ""
     result.error.issues.forEach((issue) => {
-      errorMessage += issue.path[0] + ': ' + issue.message + "\n"
+      errorMessage += "• " + issue.message + "\n"
     })
     return {successful: false, errors: errorMessage}
   }
@@ -103,7 +103,7 @@ export async function forgotPassword(state: any, formData: FormData) {
 
   const token = await createSession(user.email, user.role)
 
-  await sendEmail({toProp: user.email, subjectProp: "Restablecer contraseña - Uinta Construcciones", emailProp: ForgotPasswordEmail({userFirstname: user.firstName, token: token})})
+  const response = await sendEmail({toProp: user.email, subjectProp: "Restablecer contraseña - Uinta Construcciones", emailProp: ForgotPasswordEmail({userFirstname: user.firstName, token: token})})
 
   return {successful: true, errors: ""}
 }
